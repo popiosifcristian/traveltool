@@ -9,10 +9,7 @@ import travel.tool.repository.ICustomerRepository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static travel.tool.util.TravelToolConstants.*;
 
@@ -72,8 +69,7 @@ public class JdbcTemplateCustomer implements ICustomerRepository {
     }
 
     public void tearDown() {
-        List<Customer> customerList = (List<Customer>) getAll();
-        customerList.forEach(this::delete);
+        getAll().forEach(this::delete);
     }
 
     private static class CustomerResultSetExtractor implements ResultSetExtractor<Collection<Customer>> {

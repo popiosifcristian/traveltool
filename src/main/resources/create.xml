@@ -20,7 +20,7 @@
                 CREATE SEQUENCE company_seq;
                 CREATE TABLE "company"
                 (
-                    "id" BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('customer_seq'),
+                    "id" BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('company_seq'),
                     "name" VARCHAR(100),
                     "address" VARCHAR(200),
                     "website" VARCHAR(100),
@@ -43,7 +43,7 @@
                 CREATE SEQUENCE employee_seq;
                 CREATE TABLE "employee"
                 (
-                    "id" BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('customer_seq'),
+                    "id" BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('employee_seq'),
                     "username" VARCHAR(100),
                     "password" VARCHAR(100),
                     "email" VARCHAR(100),
@@ -69,7 +69,7 @@
                     "landmark" BIGINT,
                     "company" BIGINT,
                     "date" DATE,
-                    "start_time" TIME [ WITHOUT TIMEZONE ],
+                    "start_time" TIME WITHOUT TIME ZONE,
                     "price" DOUBLE PRECISION,
                     "available_places" INTEGER
                 );

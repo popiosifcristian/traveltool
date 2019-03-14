@@ -1,54 +1,45 @@
 package travel.tool.repository;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import travel.tool.ApplicationConfiguration;
 import travel.tool.entity.Customer;
 import travel.tool.repository.dao.JdbcTemplateCustomer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author ipop
  */
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
 class JdbcTemplateCustomerTest {
     private ApplicationConfiguration configuration = new ApplicationConfiguration();
     private JdbcTemplateCustomer unitUnderTest = new JdbcTemplateCustomer(configuration.dataSource());
-    private long actualId;
+    private static long actualId = 0;
 
-    @Test
-    @Order(1)
-    void getAll_empty() {
-        assertTrue(unitUnderTest.getAll().isEmpty());
-    }
-
-    @Test
-    @Order(2)
-    void update_save() {
+    @Test//update_save
+    void test_1() {
         actualId = unitUnderTest.update(generateTestCustomer()).getId();
-        assertFalse(unitUnderTest.getAll().isEmpty());
+        Assertions.assertNotEquals(0, actualId);
     }
 
-    @Test
-    @Order(3)
-    void findById() {
+    @Test//findById
+    void test_2() {
         assertEquals(generateTestCustomer(actualId), unitUnderTest.findById(actualId));
     }
 
-    @Test
-    @Order(4)
-    void update() {
+    @Test//update
+    void test_3() {
         unitUnderTest.update(generateTestUpdatedCustomer());
         assertEquals(generateTestUpdatedCustomer(), unitUnderTest.findById(actualId));
     }
 
-    @Test
-    @Order(5)
-    void delete() {
+    @Test//delete
+    void test_4() {
         assertTrue(unitUnderTest.delete(generateTestUpdatedCustomer()));
-        assertTrue(unitUnderTest.getAll().isEmpty());
     }
 
 
