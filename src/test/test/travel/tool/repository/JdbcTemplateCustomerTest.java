@@ -1,44 +1,67 @@
 package travel.tool.repository;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import travel.tool.ApplicationConfiguration;
 import travel.tool.entity.Customer;
+import travel.tool.repository.dao.JdbcTemplateCustomer;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * @author ipop
  */
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class JdbcTemplateCustomerTest {
     private ApplicationConfiguration configuration = new ApplicationConfiguration();
     private JdbcTemplateCustomer unitUnderTest = new JdbcTemplateCustomer(configuration.dataSource());
-    private Long actualId = 5l;
+    private long actualId;
 
     @Test
+    @Order(1)
     void getAll_empty() {
-        Assertions.assertTrue(unitUnderTest.getAll().isEmpty());
+        assertTrue(unitUnderTest.getAll().isEmpty());
     }
 
     @Test
+    @Order(2)
     void update_save() {
-        Customer customer = new Customer(0L, "First Name", "Last Name", "Email", "Phone number");
-        Assertions.assertEquals((long) actualId, (long) unitUnderTest.update(customer).getId());
+        actualId = unitUnderTest.update(generateTestCustomer()).getId();
+        assertFalse(unitUnderTest.getAll().isEmpty());
     }
 
     @Test
+    @Order(3)
     void findById() {
-        Customer customer = new Customer(actualId, "First Name", "Last Name", "Email", "Phone number");
-        Assertions.assertEquals(customer, unitUnderTest.findById(actualId));
+        assertEquals(generateTestCustomer(actualId), unitUnderTest.findById(actualId));
     }
 
     @Test
+    @Order(4)
     void update() {
-        Customer customer = new Customer(actualId, "First Customer", "Last Customer", "Email Customer", "Phone number Customer");
-        Assertions.assertEquals(customer, unitUnderTest.update(customer));
+        unitUnderTest.update(generateTestUpdatedCustomer());
+        assertEquals(generateTestUpdatedCustomer(), unitUnderTest.findById(actualId));
     }
 
     @Test
+    @Order(5)
     void delete() {
-        Customer customer = new Customer(actualId, "First Customer", "Last Customer", "Email Customer", "Phone number Customer");
-        Assertions.assertTrue(unitUnderTest.delete(customer));
+        assertTrue(unitUnderTest.delete(generateTestUpdatedCustomer()));
+        assertTrue(unitUnderTest.getAll().isEmpty());
+    }
+
+
+    private Customer generateTestCustomer() {
+        return new Customer("First Name", "Last Name", "Email", "Phone number");
+    }
+
+    private Customer generateTestCustomer(long id) {
+        return new Customer(id, "First Name", "Last Name", "Email", "Phone number");
+    }
+
+
+    private Customer generateTestUpdatedCustomer() {
+        return new Customer(actualId, "First Name", "Last Name", "Email", "Phone number");
     }
 }

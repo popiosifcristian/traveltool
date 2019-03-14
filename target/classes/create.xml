@@ -19,7 +19,7 @@
             <![CDATA[
                 CREATE TABLE "company"
                 (
-                    "id" BIGINT NOT NULL PRIMARY KEY,
+                    "id" BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('customer_seq'),
                     "name" VARCHAR(100),
                     "address" VARCHAR(200),
                     "website" VARCHAR(100),
@@ -42,7 +42,7 @@
 
                 CREATE TABLE "employee"
                 (
-                    "id" BIGINT NOT NULL PRIMARY KEY,
+                    "id" BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('customer_seq'),
                     "first_name" VARCHAR(100),
                     "last_name" VARCHAR(200),
                     "phone_number" VARCHAR(50),

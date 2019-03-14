@@ -10,6 +10,8 @@ import java.util.List;
  * @author ipop
  */
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Trip {
     private Long id;
     private Landmark landmark;

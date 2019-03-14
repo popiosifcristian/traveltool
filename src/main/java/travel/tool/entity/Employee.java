@@ -6,10 +6,27 @@ import lombok.*;
  * @author ipop
  */
 @Data
-public class Employee extends User {
+@NoArgsConstructor
+@AllArgsConstructor
+public class Employee{
+    private long id;
+    private String username;
+    private String password;
+    private String email;
     private String firstName;
     private String lastName;
     private String phoneNumber;
     private Company agency;
 
+    public Employee(String username, String password, String email, String firstName, String lastName,
+                    String phoneNumber, Company agency) {
+        this.id = 0;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.agency = agency;
+    }
 }

@@ -1,13 +1,17 @@
 package travel.tool;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import travel.tool.repository.ICustomerRepository;
+import travel.tool.repository.dao.JdbcTemplateCustomer;
 
 import javax.sql.DataSource;
 
 /**
  * @author ipop
  */
+@Configuration
 public class ApplicationConfiguration {
 
     //    @Value("${db.name}")
@@ -36,5 +40,10 @@ public class ApplicationConfiguration {
                 .append(dataSourcePassword).toString();
 
         return new SingleConnectionDataSource(url, false);
+    }
+
+    @Bean
+    public ICustomerRepository customerDAO() {
+        return new JdbcTemplateCustomer(dataSource());
     }
 }

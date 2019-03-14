@@ -5,11 +5,11 @@ import java.util.Collection;
 /**
  * @author ipop
  */
-public interface IBaseRepository <T>{
+public interface ICrudRepository<T> {
 
     Collection<T> getAll();
 
-    T findById(Long id);
+    T findById(long id);
 
     T update(T model);
 
