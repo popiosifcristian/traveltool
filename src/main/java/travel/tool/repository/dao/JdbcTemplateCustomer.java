@@ -68,7 +68,6 @@ public class JdbcTemplateCustomer implements ICustomerRepository {
         return jdbcTemplate.update(CUSTOMER_DELETE_BY_ID, customer.getId()) > 0;
     }
 
-
     private static class CustomerResultSetExtractor implements ResultSetExtractor<Collection<Customer>> {
         @Override
         public Collection<Customer> extractData(ResultSet resultSet) throws SQLException, DataAccessException {

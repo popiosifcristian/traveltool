@@ -11,4 +11,33 @@ public final class TravelToolConstants {
     public static final String CUSTOMER_UPDATE = "UPDATE customer SET first_name=?, last_name=?, email=?, phone_number=? WHERE id=? returning id";
     public static final String CUSTOMER_SAVE = "INSERT INTO customer (first_name, last_name, email, phone_number) VALUES (?, ?, ?, ?) returning id";
 
+    //Company queries for dao
+    public static final String COMPANY_GET_ALL = "SELECT c.id, c.name, c.address, c.website, c.email, c.phone_number, c.description, c.type FROM company c";
+    public static final String COMPANY_FIND_BY_ID = COMPANY_GET_ALL + "WHERE c.id=?";
+    public static final String COMPANY_DELETE_BY_ID = "DELETE FROM company WHERE id=?";
+    public static final String COMPANY_UPDATE = "UPDATE company SET name=?, address=?, website=?, email=?, phone_number=?, description=?, type=? WHERE id=? returning id";
+    public static final String COMPANY_SAVE = "INSERT INTO company (name, address, website, email, phone_number, description, type) VALUES (?, ?, ?, ?, ?, ?, ?) returning id";
+
+    //Employee queries for dao
+    public static final String EMPLOYEE_GET_ALL = "SELECT e.id, e.username, e.password, e.email, e.first_name, e.last_name, e.phone_number, e.company FROM employee e";
+    public static final String EMPLOYEE_FIND_BY_ID = EMPLOYEE_GET_ALL + "WHERE e.id=?";
+    public static final String EMPLOYEE_DELETE_BY_ID = "DELETE FROM employee WHERE id=?";
+    public static final String EMPLOYEE_UPDATE = "UPDATE employee SET username=?, password=?, email=?, first_name=?, last_name=?, phone_number=?, company=? WHERE id=? returning id";
+    public static final String EMPLOYEE_SAVE = "INSERT INTO employee (username, password, email, first_name, last_name, phone_number, company) VALUES (?, ?, ?, ?, ?, ?, ?) returning id";
+
+    //Employee queries for dao
+    public static final String LANDMARK_GET_ALL = "SELECT l.id, l.name, l.location, l.description FROM landmark l";
+    public static final String LANDMARK_FIND_BY_ID = LANDMARK_GET_ALL + "WHERE l.id=?";
+    public static final String LANDMARK_DELETE_BY_ID = "DELETE FROM landmark WHERE id=?";
+    public static final String LANDMARK_UPDATE = "UPDATE landmark SET name=?, location=?, description=? WHERE id=? returning id";
+    public static final String LANDMARK_SAVE = "INSERT INTO landmark (name, location, description) VALUES (?, ?, ?) returning id";
+
+    //Employee queries for dao
+    public static final String TRIP_GET_ALL = "SELECT t.id, t.landmark, t.company, t.date, t.start_time, t.price, t.available_places FROM trip t";
+    public static final String TRIP_FIND_BY_ID = TRIP_GET_ALL + "WHERE t.id=?";
+    public static final String TRIP_DELETE_BY_ID = "DELETE FROM trip WHERE id=?";
+    public static final String TRIP_UPDATE = "UPDATE trip SET landmark=?, company=?, date=?, start_time=?, price=?, available_places=? WHERE id=? returning id";
+    public static final String TRIP_SAVE = "INSERT INTO trip (landmark, company, date, start_time, price, available_places) VALUES (?, ?, ?, ?, ?, ?) returning id";
+
+
 }
