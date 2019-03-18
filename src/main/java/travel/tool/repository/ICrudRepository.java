@@ -14,4 +14,8 @@ public interface ICrudRepository<T> {
     T update(T model);
 
     boolean delete(T model);
+
+    default void tearDown() {
+        getAll().forEach(this::delete);
+    }
 }

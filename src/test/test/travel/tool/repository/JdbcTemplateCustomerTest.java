@@ -19,27 +19,34 @@ class JdbcTemplateCustomerTest {
     private ApplicationConfiguration configuration = new ApplicationConfiguration();
     private JdbcTemplateCustomer unitUnderTest = new JdbcTemplateCustomer(configuration.dataSource());
     private static long actualId = 0;
+    private static int initialSize;
 
-    @Test//update_save
+    //update_save
+    @Test
     void test_1() {
         actualId = unitUnderTest.update(generateTestCustomer()).getId();
+        initialSize = unitUnderTest.getAll().size();
         Assertions.assertNotEquals(0, actualId);
     }
 
-    @Test//findById
+    //findById
+    @Test
     void test_2() {
         assertEquals(generateTestCustomer(actualId), unitUnderTest.findById(actualId));
     }
 
-    @Test//update
+    //update
+    @Test
     void test_3() {
         unitUnderTest.update(generateTestUpdatedCustomer());
         assertEquals(generateTestUpdatedCustomer(), unitUnderTest.findById(actualId));
     }
 
-    @Test//delete
+    //delete
+    @Test
     void test_4() {
         assertTrue(unitUnderTest.delete(generateTestUpdatedCustomer()));
+        assertEquals(initialSize, unitUnderTest.getAll().size());
     }
 
 
