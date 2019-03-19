@@ -14,6 +14,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import static travel.tool.util.TravelToolConstants.*;
+
 /**
  * @author ipop
  */
@@ -26,22 +28,51 @@ public class JdbcTemplateCompany implements ICompanyRepository {
 
     @Override
     public Collection<Company> getAll() {
-        return null;
+        return jdbcTemplate.query(COMPANY_GET_ALL, new CompanyResultSetExtractor());
     }
 
     @Override
     public Company findById(long id) {
-        return null;
+        Collection<Company> companies = jdbcTemplate.query(COMPANY_FIND_BY_ID, new CompanyResultSetExtractor(), id);
+        Company company;
+        if (companies.size() != 1) {
+            company = null;
+        } else {
+            company = companies.iterator().next();
+        }
+        return company;
     }
 
     @Override
-    public Company update(Company model) {
-        return null;
-    }
+    public Company update(Company company) {
+        Long newId;
+        if (company.getId() > 0) {
+            newId = jdbcTemplate.queryForObject(COMPANY_UPDATE, new Object[]{
+                    company.getName(),
+                    company.getAddress(),
+                    company.getWebsite(),
+                    company.getEmail(),
+                    company.getPhoneNumber(),
+                    company.getDescription(),
+                    company.getId()
+            }, (resultSet, i) -> resultSet.getLong(1));
+        } else {
+            newId = jdbcTemplate.queryForObject(COMPANY_SAVE, new Object[]{
+                    company.getName(),
+                    company.getAddress(),
+                    company.getWebsite(),
+                    company.getEmail(),
+                    company.getPhoneNumber(),
+                    company.getDescription(),
+                    company.getCompanyType().name(),
+            }, (resultSet, i) -> resultSet.getLong(1));
+        }
+        company.setId(newId);
+        return company;    }
 
     @Override
-    public boolean delete(Company model) {
-        return false;
+    public boolean delete(Company company) {
+        return jdbcTemplate.update(COMPANY_DELETE_BY_ID, company.getId()) > 0;
     }
 
 

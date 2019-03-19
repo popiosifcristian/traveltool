@@ -5,8 +5,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
-import travel.tool.repository.ICustomerRepository;
-import travel.tool.repository.dao.JdbcTemplateCustomer;
+import travel.tool.repository.*;
+import travel.tool.repository.dao.*;
 
 import javax.sql.DataSource;
 
@@ -46,7 +46,28 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public ICustomerRepository customerDAO() {
+    public ICustomerRepository customerDao() {
         return new JdbcTemplateCustomer(dataSource());
     }
+
+    @Bean
+    public ICompanyRepository companyDao() {
+        return new JdbcTemplateCompany(dataSource());
+    }
+
+    @Bean
+    public IEmployeeRepository employeeDao() {
+        return new JdbcTemplateEmployee(dataSource());
+    }
+
+    @Bean
+    public ILandmarkRepository landmarkDao() {
+        return new JdbcTemplateLandmark(dataSource());
+    }
+
+    @Bean
+    public ITripRepository tripDao() {
+        return new JdbcTemplateTrip(dataSource());
+    }
+
 }

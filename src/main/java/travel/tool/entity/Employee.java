@@ -5,11 +5,10 @@ import lombok.*;
 /**
  * @author ipop
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Employee{
-    private long id;
+public class Employee extends AbstractEntity{
     private String username;
     private String password;
     private String email;

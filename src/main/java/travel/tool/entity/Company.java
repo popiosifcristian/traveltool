@@ -5,11 +5,10 @@ import lombok.*;
 /**
  * @author ipop
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-public class Company{
-    private long id;
+public class Company extends AbstractEntity{
     private String name;
     private String address;
     private String website;
@@ -21,6 +20,18 @@ public class Company{
     public Company(String name, String address, String website, String email, String phoneNumber, String description,
                    CompanyType companyType) {
         this.id = 0;
+        this.name = name;
+        this.address = address;
+        this.website = website;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.description = description;
+        this.companyType = companyType;
+    }
+
+    public Company(long id, String name, String address, String website, String email, String phoneNumber,
+                   String description, CompanyType companyType) {
+        super(id);
         this.name = name;
         this.address = address;
         this.website = website;

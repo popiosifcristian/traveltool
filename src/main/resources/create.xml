@@ -74,24 +74,6 @@
                     "available_places" INTEGER
                 );
 
-                CREATE TABLE "employee_company"
-                (
-                    "employee_id" BIGINT REFERENCES employee(id),
-                    "company_id" BIGINT REFERENCES company(id)
-                );
-
-                CREATE TABLE "trip_company"
-                (
-                    "trip_id" BIGINT REFERENCES trip(id),
-                    "company_id" BIGINT REFERENCES company(id)
-                );
-
-                CREATE TABLE "trip_landmark"
-                (
-                    "trip_id" BIGINT REFERENCES trip(id),
-                    "landmark_id" BIGINT REFERENCES landmark(id)
-                );
-
                 CREATE TABLE "customer_trip"
                 (
                     "customer_id" BIGINT REFERENCES customer(id),

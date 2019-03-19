@@ -1,17 +1,29 @@
 package travel.tool.repository.dao;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import travel.tool.entity.Employee;
+import travel.tool.repository.ICompanyRepository;
 import travel.tool.repository.IEmployeeRepository;
 
 import javax.sql.DataSource;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
+import static travel.tool.util.TravelToolConstants.*;
 
 /**
  * @author ipop
  */
 public class JdbcTemplateEmployee implements IEmployeeRepository {
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private static ICompanyRepository companyRepository;
 
     public JdbcTemplateEmployee(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -19,21 +31,76 @@ public class JdbcTemplateEmployee implements IEmployeeRepository {
 
     @Override
     public Collection<Employee> getAll() {
-        return null;
+        return jdbcTemplate.query(EMPLOYEE_GET_ALL, new EmployeeResultSetExtractor());
     }
 
     @Override
     public Employee findById(long id) {
-        return null;
+        Collection<Employee> employees = jdbcTemplate.query(EMPLOYEE_FIND_BY_ID, new EmployeeResultSetExtractor(), id);
+        Employee employee;
+        if (employees.size() != 1) {
+            employee = null;
+        } else {
+            employee = employees.iterator().next();
+        }
+        return employee;
     }
 
     @Override
-    public Employee update(Employee model) {
-        return null;
+    public Employee update(Employee employee) {
+        Long newId;
+        if (employee.getId() > 0) {
+            newId = jdbcTemplate.queryForObject(EMPLOYEE_UPDATE, new Object[]{
+                    employee.getUsername(),
+                    employee.getPassword(),
+                    employee.getEmail(),
+                    employee.getFirstName(),
+                    employee.getLastName(),
+                    employee.getPhoneNumber(),
+                    employee.getAgency().getId(),
+                    employee.getId()
+            }, (resultSet, i) -> resultSet.getLong(1));
+        } else {
+            newId = jdbcTemplate.queryForObject(EMPLOYEE_SAVE, new Object[]{
+                    employee.getUsername(),
+                    employee.getPassword(),
+                    employee.getEmail(),
+                    employee.getFirstName(),
+                    employee.getLastName(),
+                    employee.getPhoneNumber(),
+                    employee.getAgency().getId(),
+            }, (resultSet, i) -> resultSet.getLong(1));
+        }
+        employee.setId(newId);
+        return employee;
     }
 
     @Override
-    public boolean delete(Employee model) {
-        return false;
+    public boolean delete(Employee employee) {
+        return jdbcTemplate.update(EMPLOYEE_DELETE_BY_ID, employee.getId()) > 0;
+    }
+
+    private static class EmployeeResultSetExtractor implements ResultSetExtractor<Collection<Employee>> {
+        @Override
+        public Collection<Employee> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+            Map<Long, Employee> employeeMap = new HashMap<>();
+
+            while (resultSet.next()) {
+                if (!employeeMap.keySet().contains(resultSet.getLong("id"))) {
+                    Employee employee = new Employee();
+                    employee.setId(resultSet.getLong("id"));
+                    employee.setUsername(resultSet.getString("username"));
+                    employee.setPassword(resultSet.getString("password"));
+                    employee.setEmail(resultSet.getString("first_name"));
+                    employee.setFirstName(resultSet.getString("last_name"));
+                    employee.setLastName(resultSet.getString("phone_number"));
+                    employee.setPhoneNumber(resultSet.getString("description"));
+                    employee.setAgency(companyRepository.findById(resultSet.getLong("company")));
+
+                    employeeMap.put(employee.getId(), employee);
+                }
+            }
+            return employeeMap.values();
+        }
     }
 }
