@@ -7,6 +7,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import travel.tool.repository.*;
 import travel.tool.repository.dao.*;
+import travel.tool.service.CustomerService;
 
 import javax.sql.DataSource;
 
@@ -15,7 +16,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @PropertySource("classpath:/application.properties")
-public class ApplicationConfiguration {
+public class ApplicationConfigurationTest {
 
     @Value("${db.name}")
     private String dataSourceDatabase;
@@ -68,6 +69,11 @@ public class ApplicationConfiguration {
     @Bean
     public ITripRepository tripDao() {
         return new JdbcTemplateTrip(dataSource());
+    }
+
+    @Bean
+    public CustomerService customerService() {
+        return new CustomerService();
     }
 
 }

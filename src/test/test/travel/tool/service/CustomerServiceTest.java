@@ -1,49 +1,71 @@
 package travel.tool.service;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+import travel.tool.ApplicationConfiguration;
+import travel.tool.ApplicationConfigurationTest;
 import travel.tool.entity.Customer;
-import travel.tool.repository.dao.JdbcTemplateCustomer;
 
-import java.util.ArrayList;
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 /**
  * @author ipop
  */
-@ExtendWith(MockitoExtension.class)
+@TestMethodOrder(MethodOrderer.Alphanumeric.class)
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = { ApplicationConfigurationTest.class })
 class CustomerServiceTest {
-    @Mock
-    private JdbcTemplateCustomer companyRepository;
-    @InjectMocks
-    private CustomerService unitUnderTest = new CustomerService();
+    @Autowired
+    private CustomerService unitUnderTest;
+    private static long actualId = 0;
+    private static int initialSize;
 
+    //update_save
     @Test
-    void getAll() {
-        when(companyRepository.getAll()).thenReturn(new ArrayList<>());
-        assertTrue(unitUnderTest.getAll().isEmpty());
-        verify(companyRepository).getAll();
+    void test_1() {
+        initialSize = unitUnderTest.getAll().size();
+        actualId = unitUnderTest.update(generateTestData()).getId();
+        assertNotEquals(0, actualId);
     }
 
+    //findById
     @Test
-    void findById() {
-        verify(companyRepository).findById(any(Long.class));
+    void test_2() {
+        assertEquals(generateTestData(actualId), unitUnderTest.findById(actualId));
     }
 
+    //update
     @Test
-    void update() {
-        verify(companyRepository).update(any(Customer.class));
+    void test_3() {
+        unitUnderTest.update(generateTestUpdatedData());
+        assertEquals(generateTestUpdatedData(), unitUnderTest.findById(actualId));
     }
 
+    //delete
     @Test
-    void delete() {
-        verify(companyRepository).delete(any(Customer.class));
+    void test_4() {
+        assertTrue(unitUnderTest.delete(generateTestUpdatedData()));
+        assertEquals(initialSize, unitUnderTest.getAll().size());
+    }
+
+    private Customer generateTestData() {
+        return new Customer("First Name", "Last Name", "Email", "Phone number");
+    }
+
+    private Customer generateTestData(long id) {
+        return new Customer(id, "First Name", "Last Name", "Email", "Phone number");
+    }
+
+    private Customer generateTestUpdatedData() {
+        return new Customer(actualId, "First Name", "Last Name", "Email", "Phone number");
     }
 }

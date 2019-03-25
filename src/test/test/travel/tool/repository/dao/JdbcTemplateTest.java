@@ -22,8 +22,8 @@ public abstract class JdbcTemplateTest<T extends AbstractEntity> {
     //update_save
     @Test
     void test_1() {
-        actualId = unitUnderTest.update(generateTestData()).getId();
         initialSize = unitUnderTest.getAll().size();
+        actualId = unitUnderTest.update(generateTestData()).getId();
         Assertions.assertNotEquals(0, actualId);
     }
 
