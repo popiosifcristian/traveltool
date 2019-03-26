@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Service
 @ComponentScan
-public class CustomerService {
+public class CustomerService implements ICustomerRepository{
 
     @Autowired
     private ICustomerRepository customerRepository;
@@ -23,7 +23,7 @@ public class CustomerService {
         return new ArrayList<>(customerRepository.getAll());
     }
 
-    public Customer findById(Long id) {
+    public Customer findById(long id) {
         return customerRepository.findById(id);
     }
 

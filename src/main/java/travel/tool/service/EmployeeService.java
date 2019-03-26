@@ -7,8 +7,8 @@ import travel.tool.repository.IEmployeeRepository;
 /**
  * @author ipop
  */
-@Service
+//@Service
 public class EmployeeService {
-    @Autowired
+//    @Autowired
     private IEmployeeRepository employeeRepository;
 }

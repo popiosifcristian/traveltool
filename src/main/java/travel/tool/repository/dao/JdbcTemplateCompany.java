@@ -54,6 +54,7 @@ public class JdbcTemplateCompany implements ICompanyRepository {
                     company.getEmail(),
                     company.getPhoneNumber(),
                     company.getDescription(),
+                    company.getCompanyType().name(),
                     company.getId()
             }, (resultSet, i) -> resultSet.getLong(1));
         } else {
