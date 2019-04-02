@@ -69,7 +69,8 @@ public class JdbcTemplateCompany implements ICompanyRepository {
             }, (resultSet, i) -> resultSet.getLong(1));
         }
         company.setId(newId);
-        return company;    }
+        return company;
+    }
 
     @Override
     public boolean delete(Company company) {
