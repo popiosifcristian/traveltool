@@ -209,14 +209,17 @@ public class EmployeeController extends AbstractFxController<Employee> implement
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        ueAgency.setConverter(getCompanyStringConverter());
         updateAgencyList();
         employeeTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         setColumnProperties();
         loadDetails();
-    }//TODO: agencyList
+    }
 
     private void updateAgencyList() {
         companyList.clear();
+        ueAgency.getSelectionModel().clearSelection();
+        ueAgency.getItems().clear();
         companyList.addAll(companyService.getAll().stream()
                 .filter(company -> company.getCompanyType().equals(CompanyType.AGENCY)).collect(Collectors.toList()));
         ueAgency.setItems(companyList);
