@@ -12,7 +12,7 @@ import java.util.List;
  * @author ipop
  */
 @Service
-public class CompanyService implements ICompanyRepository{
+public class CompanyService implements ICompanyRepository {
     @Autowired
     private ICompanyRepository companyRepository;
 

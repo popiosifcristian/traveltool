@@ -1,6 +1,7 @@
 package travel.tool.repository.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
@@ -21,9 +22,9 @@ import static travel.tool.util.TravelToolConstants.*;
  * @author ipop
  */
 public class JdbcTemplateEmployee implements IEmployeeRepository {
-    private JdbcTemplate jdbcTemplate;
     @Autowired
-    private static ICompanyRepository companyRepository;
+    private ICompanyRepository companyRepository;
+    private JdbcTemplate jdbcTemplate;
 
     public JdbcTemplateEmployee(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -80,7 +81,19 @@ public class JdbcTemplateEmployee implements IEmployeeRepository {
         return jdbcTemplate.update(EMPLOYEE_DELETE_BY_ID, employee.getId()) > 0;
     }
 
-    private static class EmployeeResultSetExtractor implements ResultSetExtractor<Collection<Employee>> {
+    @Override
+    public Employee findByUsername(String username) {
+        Collection<Employee> employees = jdbcTemplate.query(EMPLOYEE_FIND_BY_USERNAME, new EmployeeResultSetExtractor(), username);
+        Employee employee;
+        if (employees.size() != 1) {
+            employee = null;
+        } else {
+            employee = employees.iterator().next();
+        }
+        return employee;
+    }
+
+    private class EmployeeResultSetExtractor implements ResultSetExtractor<Collection<Employee>> {
         @Override
         public Collection<Employee> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
             Map<Long, Employee> employeeMap = new HashMap<>();
@@ -91,10 +104,10 @@ public class JdbcTemplateEmployee implements IEmployeeRepository {
                     employee.setId(resultSet.getLong("id"));
                     employee.setUsername(resultSet.getString("username"));
                     employee.setPassword(resultSet.getString("password"));
-                    employee.setEmail(resultSet.getString("first_name"));
-                    employee.setFirstName(resultSet.getString("last_name"));
-                    employee.setLastName(resultSet.getString("phone_number"));
-                    employee.setPhoneNumber(resultSet.getString("description"));
+                    employee.setEmail(resultSet.getString("email"));
+                    employee.setFirstName(resultSet.getString("first_name"));
+                    employee.setLastName(resultSet.getString("last_name"));
+                    employee.setPhoneNumber(resultSet.getString("phone_number"));
                     employee.setAgency(companyRepository.findById(resultSet.getLong("company")));
 
                     employeeMap.put(employee.getId(), employee);

@@ -1,14 +1,20 @@
-package travel.tool;
+package travel.tool.util;
 
+import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import travel.tool.repository.*;
 import travel.tool.repository.dao.*;
 
 import javax.sql.DataSource;
+import java.io.IOException;
+import java.util.ResourceBundle;
 
 /**
  * @author ipop
@@ -25,8 +31,10 @@ public class ApplicationConfiguration {
     private String dataSourceUsername;
     @Value("${db.password}")
     private String dataSourcePassword;
+    @Autowired
+    private SpringFXMLLoader springFXMLLoader;
 
-
+    @Bean
     public DataSource dataSource() {
         String url = new StringBuilder()
                 .append("jdbc:")
@@ -46,28 +54,38 @@ public class ApplicationConfiguration {
     }
 
     @Bean
-    public ICustomerRepository customerDao() {
+    public ICustomerRepository customerRepository() {
         return new JdbcTemplateCustomer(dataSource());
     }
 
     @Bean
-    public ICompanyRepository companyDao() {
+    public ICompanyRepository companyRepository() {
         return new JdbcTemplateCompany(dataSource());
     }
 
     @Bean
-    public IEmployeeRepository employeeDao() {
+    public IEmployeeRepository employeeRepository() {
         return new JdbcTemplateEmployee(dataSource());
     }
 
     @Bean
-    public ILandmarkRepository landmarkDao() {
+    public ILandmarkRepository landmarkRepository() {
         return new JdbcTemplateLandmark(dataSource());
     }
 
     @Bean
-    public ITripRepository tripDao() {
+    public ITripRepository tripRepository() {
         return new JdbcTemplateTrip(dataSource());
     }
 
+    @Bean
+    public ResourceBundle resourceBundle() {
+        return ResourceBundle.getBundle("Bundle");
+    }
+
+    @Bean
+    @Lazy //Stage only created after Spring context bootstap
+    public StageManager stageManager(Stage stage) {
+        return new StageManager(springFXMLLoader, stage);
+    }
 }

@@ -31,4 +31,17 @@ public class EmployeeService {
     public boolean delete(Employee customer) {
         return employeeRepository.delete(customer);
     }
+
+    public Employee findByUsername(String username) {
+        return employeeRepository.findByUsername(username);
+    }
+
+    public boolean authenticate(String username, String password) {
+        Employee employee = this.findByUsername(username);
+        if (employee == null) {
+            return false;
+        } else {
+            return password.equals(employee.getPassword());
+        }
+    }
 }

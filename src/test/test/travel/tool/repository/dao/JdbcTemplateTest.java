@@ -1,7 +1,7 @@
 package travel.tool.repository.dao;
 
 import org.junit.jupiter.api.*;
-import travel.tool.ApplicationConfiguration;
+import travel.tool.util.ApplicationConfiguration;
 import travel.tool.entity.AbstractEntity;
 import travel.tool.repository.ICrudRepository;
 

@@ -28,4 +28,16 @@ public class Employee extends AbstractEntity{
         this.phoneNumber = phoneNumber;
         this.agency = agency;
     }
+
+    public Employee(long id, String username, String password, String email, String firstName, String lastName,
+                    String phoneNumber, Company agency) {
+        super(id);
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.agency = agency;
+    }
 }

@@ -45,7 +45,7 @@ public class EmployeeController extends AbstractFxController<Employee> implement
     private ObservableList<Company> companyList = FXCollections.observableArrayList();
 
     @FXML
-    private TextField ueId;
+    private Label ueId;
     @FXML
     private TextField ueUsername;
     @FXML
@@ -62,6 +62,8 @@ public class EmployeeController extends AbstractFxController<Employee> implement
     private ChoiceBox<Company> ueAgency;
     @FXML
     private Button ueSubmit;
+    @FXML
+    private Button ueClear;
     @FXML
     private TableView<Employee> employeeTable;
     @FXML
@@ -94,7 +96,7 @@ public class EmployeeController extends AbstractFxController<Employee> implement
                     getPhoneNumber(), getCompany());
 
         } else {
-            employee = new Employee(getUsername(), getPassword(), getEmail(), getFirstName(), getLastName(),
+            employee = new Employee(getId(), getUsername(), getPassword(), getEmail(), getFirstName(), getLastName(),
                     getPhoneNumber(), getCompany());
 
         }
@@ -102,6 +104,10 @@ public class EmployeeController extends AbstractFxController<Employee> implement
 
         clearFields();
         loadDetails();
+    }
+
+    private Long getId() {
+        return Long.parseLong(ueId.getText());
     }
 
     private String getUsername() {
@@ -171,6 +177,7 @@ public class EmployeeController extends AbstractFxController<Employee> implement
 
     @Override
     protected void update(Employee employee) {
+        ueId.setText(Long.toString(employee.getId()));
         ueUsername.setText(employee.getUsername());
         uePassword.setText(employee.getPassword());
         ueEmail.setText(employee.getEmail());
@@ -203,8 +210,7 @@ public class EmployeeController extends AbstractFxController<Employee> implement
         ueFirstName.clear();
         ueLastName.clear();
         uePhoneNumber.clear();
-        ueAgency.getSelectionModel().clearSelection();
-        ueAgency.getItems().clear();
+        updateAgencyList();
     }
 
     @Override
@@ -225,4 +231,7 @@ public class EmployeeController extends AbstractFxController<Employee> implement
         ueAgency.setItems(companyList);
     }
 
+    public void clearSelections(ActionEvent actionEvent) {
+        clearFields();
+    }
 }

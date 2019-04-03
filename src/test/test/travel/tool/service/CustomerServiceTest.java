@@ -1,15 +1,12 @@
 package travel.tool.service;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import travel.tool.ApplicationConfiguration;
 import travel.tool.ApplicationConfigurationTest;
 import travel.tool.entity.Customer;
 

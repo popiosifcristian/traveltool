@@ -24,12 +24,11 @@ import static travel.tool.util.TravelToolConstants.*;
  * @author ipop
  */
 public class JdbcTemplateTrip implements ITripRepository {
+    @Autowired
+    private ICompanyRepository companyRepository;
+    @Autowired
+    private ILandmarkRepository landmarkRepository;
     private JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private static ICompanyRepository companyRepository;
-    @Autowired
-    private static ILandmarkRepository landmarkRepository;
 
     public JdbcTemplateTrip(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
@@ -76,15 +75,15 @@ public class JdbcTemplateTrip implements ITripRepository {
             }, (resultSet, i) -> resultSet.getLong(1));
         }
         trip.setId(newId);
-        return trip;    }
+        return trip;
+    }
 
     @Override
     public boolean delete(Trip trip) {
         return jdbcTemplate.update(TRIP_DELETE_BY_ID, trip.getId()) > 0;
     }
 
-
-    private static class TripResultSetExtractor implements ResultSetExtractor<Collection<Trip>> {
+    private class TripResultSetExtractor implements ResultSetExtractor<Collection<Trip>> {
         @Override
         public Collection<Trip> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
             Map<Long, Trip> tripMap = new HashMap<>();

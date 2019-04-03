@@ -13,8 +13,7 @@ import java.util.List;
  * @author ipop
  */
 @Service
-@ComponentScan
-public class CustomerService implements ICustomerRepository{
+public class CustomerService implements ICustomerRepository {
 
     @Autowired
     private ICustomerRepository customerRepository;

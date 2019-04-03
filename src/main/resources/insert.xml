@@ -4,5 +4,31 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
     <include file="create.xml"/>
 
+    <changeSet id="01" author="ipop">
+        <sql>
+            <![CDATA[
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRAVEL AGENCY 1', 'Cluj', 'www.travelag1.com', 'tag1@gmail.com', '0123456789', 'Test tag 1', 'AGENCY');
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRAVEL AGENCY 2', 'Cluj', 'www.travelag2.com', 'tag2@gmail.com', '0123456789', 'Test tag 2', 'AGENCY');
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRAVEL AGENCY 3', 'Cluj', 'www.travelag3.com', 'tag3@gmail.com', '0123456789', 'Test tag 3', 'AGENCY');
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRAVEL AGENCY 4', 'Cluj', 'www.travelag4.com', 'tag4@gmail.com', '0123456789', 'Test tag 4', 'AGENCY');
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRAVEL AGENCY 5', 'Cluj', 'www.travelag5.com', 'tag5@gmail.com', '0123456789', 'Test tag 5', 'AGENCY');
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRANSPORT COMPANY 1', 'Cluj', 'www.transporttc1.com', 'ttc1@gmail.com', '0123456789', 'Test ttc 1', 'TRANSPORT');
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRANSPORT COMPANY 2', 'Cluj', 'www.transporttc2.com', 'ttc2@gmail.com', '0123456789', 'Test ttc 2', 'TRANSPORT');
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRANSPORT COMPANY 3', 'Cluj', 'www.transporttc3.com', 'ttc3@gmail.com', '0123456789', 'Test ttc 3', 'TRANSPORT');
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRANSPORT COMPANY 4', 'Cluj', 'www.transporttc4.com', 'ttc4@gmail.com', '0123456789', 'Test ttc 4', 'TRANSPORT');
+                    INSERT INTO company (name, address, website, email, phone_number, description, type)
+                    VALUES ('TEST TRANSPORT COMPANY 5', 'Cluj', 'www.transporttc5.com', 'ttc5@gmail.com', '0123456789', 'Test ttc 5', 'TRANSPORT');
 
+            ]]>
+        </sql>
+    </changeSet>
 </databaseChangeLog>

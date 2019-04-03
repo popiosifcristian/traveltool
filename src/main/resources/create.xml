@@ -44,7 +44,7 @@
                 CREATE TABLE "employee"
                 (
                     "id" BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('employee_seq'),
-                    "username" VARCHAR(100),
+                    "username" VARCHAR(100) NOT NULL UNIQUE,
                     "password" VARCHAR(100),
                     "email" VARCHAR(100),
                     "first_name" VARCHAR(100),
