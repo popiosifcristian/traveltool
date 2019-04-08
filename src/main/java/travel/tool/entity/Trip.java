@@ -3,9 +3,9 @@ package travel.tool.entity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 /**

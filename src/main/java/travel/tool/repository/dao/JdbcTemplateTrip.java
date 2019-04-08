@@ -1,7 +1,6 @@
 package travel.tool.repository.dao;
 
-import org.joda.time.LocalDate;
-import org.joda.time.LocalTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -14,6 +13,8 @@ import travel.tool.repository.ITripRepository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,6 +52,7 @@ public class JdbcTemplateTrip implements ITripRepository {
         return trip;
     }
 
+    //TODO: FIX THE DATE ISSUES
     @Override
     public Trip update(Trip trip) {
         Long newId;
