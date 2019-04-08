@@ -29,8 +29,8 @@ public class StageManager {
         show(viewRootNodeHierarchy, view.getTitle());
     }
     
-    private void show(final Parent rootnode, String title) {
-        Scene scene = prepareScene(rootnode);
+    private void show(final Parent rootNode, String title) {
+        Scene scene = prepareScene(rootNode);
 
         primaryStage.setTitle(title);
         primaryStage.setScene(scene);
@@ -44,13 +44,13 @@ public class StageManager {
         }
     }
     
-    private Scene prepareScene(Parent rootnode){
+    private Scene prepareScene(Parent rootNode){
         Scene scene = primaryStage.getScene();
 
         if (scene == null) {
-            scene = new Scene(rootnode);
+            scene = new Scene(rootNode);
         }
-        scene.setRoot(rootnode);
+        scene.setRoot(rootNode);
         return scene;
     }
 
@@ -70,8 +70,7 @@ public class StageManager {
         }
         return rootNode;
     }
-    
-    
+
     private void logAndExit(String errorMsg, Exception exception) {
         LOG.error(errorMsg, exception, exception.getCause());
         Platform.exit();

@@ -5,13 +5,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +17,6 @@ import travel.tool.service.CompanyService;
 import travel.tool.service.EmployeeService;
 
 import java.net.URL;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -34,14 +28,13 @@ import java.util.stream.Collectors;
  * @author ipop
  */
 @Controller
-public class EmployeeController extends AbstractFxController<Employee> implements Initializable {
+public class EmployeeController extends AbstractFxController<Employee> {
 
     @Autowired
     private EmployeeService employeeService;
     @Autowired
     private CompanyService companyService;
 
-    private ObservableList<Employee> employeeList = FXCollections.observableArrayList();
     private ObservableList<Company> companyList = FXCollections.observableArrayList();
 
     @FXML
@@ -87,23 +80,100 @@ public class EmployeeController extends AbstractFxController<Employee> implement
     @FXML
     private TableColumn<Employee, Boolean> leDelete;
 
+    @Override
+    protected void loadDetails() {
+        updateAgencyList();
+        entityList.clear();
+        entityList.addAll(employeeService.getAll());
+
+        employeeTable.setItems(entityList);
+    }
+
+    @Override
+    protected void setColumnProperties() {
+        leId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        leUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
+        lePassword.setCellValueFactory(new PropertyValueFactory<>("password"));
+        leEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
+        leFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
+        leLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        lePhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        leAgency.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAgency().getName()));
+        leEdit.setCellFactory(editCellFactory);
+        leDelete.setCellFactory(deleteCellFactory);
+    }
+
+    @Override
+    protected void update(Employee employee) {
+        ueId.setText(Long.toString(employee.getId()));
+        ueUsername.setText(employee.getUsername());
+        uePassword.setText(employee.getPassword());
+        ueEmail.setText(employee.getEmail());
+        ueFirstName.setText(employee.getFirstName());
+        ueLastName.setText(employee.getLastName());
+        uePhoneNumber.setText(employee.getPhoneNumber());
+        ueAgency.setValue(employee.getAgency());
+    }
+
+    @Override
+    protected void delete(Employee entity) {
+        if (deleteAlert()) {
+            employeeService.delete(entity);
+        }
+
+        loadDetails();
+    }
+
+    @Override
+    protected void clearFields() {
+        ueId.setText(null);
+        ueUsername.clear();
+        uePassword.clear();
+        ueEmail.clear();
+        ueFirstName.clear();
+        ueLastName.clear();
+        uePhoneNumber.clear();
+        updateAgencyList();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        ueAgency.setConverter(getCompanyStringConverter());
+        updateAgencyList();
+        employeeTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        setColumnProperties();
+        loadDetails();
+    }
 
     @FXML
     private void ueSubmit(ActionEvent actionEvent) {
         Employee employee;
-        if (ueId.getText() == null || ueId.getText().isEmpty()) {
-            employee = new Employee(getUsername(), getPassword(), getEmail(), getFirstName(), getLastName(),
-                    getPhoneNumber(), getCompany());
+        if (notEmptyValidation("Agency", ueAgency.getSelectionModel().isEmpty())) {
+            if (ueId.getText() == null || ueId.getText().isEmpty()) {
+                employee = new Employee(getUsername(), getPassword(), getEmail(), getFirstName(), getLastName(),
+                        getPhoneNumber(), getCompany());
+                saveAlert();
 
-        } else {
-            employee = new Employee(getId(), getUsername(), getPassword(), getEmail(), getFirstName(), getLastName(),
-                    getPhoneNumber(), getCompany());
+            } else {
+                employee = new Employee(getId(), getUsername(), getPassword(), getEmail(), getFirstName(), getLastName(),
+                        getPhoneNumber(), getCompany());
+                updateAlert(employee);
 
+            }
+            employeeService.update(employee);
+
+            clearFields();
+            loadDetails();
         }
-        employeeService.update(employee);
+    }
 
-        clearFields();
-        loadDetails();
+    private void updateAgencyList() {
+        companyList.clear();
+        ueAgency.getSelectionModel().clearSelection();
+        ueAgency.getItems().clear();
+        companyList.addAll(companyService.getAll().stream()
+                .filter(company -> company.getCompanyType().equals(CompanyType.AGENCY)).collect(Collectors.toList()));
+        ueAgency.setItems(companyList);
     }
 
     private Long getId() {
@@ -150,88 +220,5 @@ public class EmployeeController extends AbstractFxController<Employee> implement
                 return companyList.stream().filter(c -> c.getName().equals(string)).findFirst().orElse(null);
             }
         };
-    }
-
-    @Override
-    protected void loadDetails() {
-        updateAgencyList();
-        employeeList.clear();
-        employeeList.addAll(employeeService.getAll());
-
-        employeeTable.setItems(employeeList);
-    }
-
-    @Override
-    protected void setColumnProperties() {
-        leId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        leUsername.setCellValueFactory(new PropertyValueFactory<>("username"));
-        lePassword.setCellValueFactory(new PropertyValueFactory<>("password"));
-        leEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
-        leFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        leLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        lePhoneNumber.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        leAgency.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAgency().getName()));
-        leEdit.setCellFactory(editCellFactory);
-        leDelete.setCellFactory(deleteCellFactory);
-    }
-
-    @Override
-    protected void update(Employee employee) {
-        ueId.setText(Long.toString(employee.getId()));
-        ueUsername.setText(employee.getUsername());
-        uePassword.setText(employee.getPassword());
-        ueEmail.setText(employee.getEmail());
-        ueFirstName.setText(employee.getFirstName());
-        ueLastName.setText(employee.getLastName());
-        uePhoneNumber.setText(employee.getPhoneNumber());
-        ueAgency.setValue(employee.getAgency());
-    }
-
-    @Override
-    protected void delete(Employee entity) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Confirmation Dialog");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to delete selected?");
-        Optional<ButtonType> action = alert.showAndWait();
-        if (action.get() == ButtonType.OK) {
-            employeeService.delete(entity);
-        }
-
-        loadDetails();
-    }
-
-    @Override
-    protected void clearFields() {
-        ueId.setText(null);
-        ueUsername.clear();
-        uePassword.clear();
-        ueEmail.clear();
-        ueFirstName.clear();
-        ueLastName.clear();
-        uePhoneNumber.clear();
-        updateAgencyList();
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        ueAgency.setConverter(getCompanyStringConverter());
-        updateAgencyList();
-        employeeTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        setColumnProperties();
-        loadDetails();
-    }
-
-    private void updateAgencyList() {
-        companyList.clear();
-        ueAgency.getSelectionModel().clearSelection();
-        ueAgency.getItems().clear();
-        companyList.addAll(companyService.getAll().stream()
-                .filter(company -> company.getCompanyType().equals(CompanyType.AGENCY)).collect(Collectors.toList()));
-        ueAgency.setItems(companyList);
-    }
-
-    public void clearSelections(ActionEvent actionEvent) {
-        clearFields();
     }
 }

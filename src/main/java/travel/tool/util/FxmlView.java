@@ -4,6 +4,28 @@ import java.util.ResourceBundle;
 
 public enum FxmlView {
 
+    COMPANY {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("company.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/views/company.fxml";
+        }
+    },
+    CUSTOMER {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("customer.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/views/customer.fxml";
+        }
+    },
     EMPLOYEE {
         @Override
         public String getTitle() {
@@ -13,6 +35,28 @@ public enum FxmlView {
         @Override
         public String getFxmlFile() {
             return "/views/employee.fxml";
+        }
+    },
+    LANDMARK {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("landmark.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/views/landmark.fxml";
+        }
+    },
+    TRIP {
+        @Override
+        public String getTitle() {
+            return getStringFromResourceBundle("trip.title");
+        }
+
+        @Override
+        public String getFxmlFile() {
+            return "/views/trip.fxml";
         }
     },
     LOGIN {
