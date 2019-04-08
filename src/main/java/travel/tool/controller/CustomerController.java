@@ -120,23 +120,23 @@ public class CustomerController extends AbstractFxController<Customer> {
         loadDetails();
     }
 
-    public Long getId() {
+    private Long getId() {
         return Long.parseLong(id.getText());
     }
 
-    public String getFirstName() {
+    private String getFirstName() {
         return firstName.getText();
     }
 
-    public String getLastName() {
+    private String getLastName() {
         return lastName.getText();
     }
 
-    public String getEmail() {
+    private String getEmail() {
         return email.getText();
     }
 
-    public String getPhoneNumber() {
+    private String getPhoneNumber() {
         return phoneNumber.getText();
     }
 }

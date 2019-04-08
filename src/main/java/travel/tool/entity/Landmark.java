@@ -21,4 +21,11 @@ public class Landmark extends AbstractEntity{
         this.location = location;
         this.description = description;
     }
+
+    public Landmark(long id, String name, String location, String description) {
+        super(id);
+        this.name = name;
+        this.location = location;
+        this.description = description;
+    }
 }
