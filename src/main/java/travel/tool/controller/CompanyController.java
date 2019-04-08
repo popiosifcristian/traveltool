@@ -50,7 +50,7 @@ public class CompanyController extends AbstractFxController<Company> {
     @FXML
     public TableView<Company> companyTable;
     @FXML
-    public TableColumn<Company, Long> lid;
+    public TableColumn<Company, Long> lId;
     @FXML
     public TableColumn<Company, String> lName;
     @FXML
@@ -80,7 +80,7 @@ public class CompanyController extends AbstractFxController<Company> {
 
     @Override
     protected void setColumnProperties() {
-        lid.setCellValueFactory(new PropertyValueFactory<>("id"));
+        lId.setCellValueFactory(new PropertyValueFactory<>("id"));
         lName.setCellValueFactory(new PropertyValueFactory<>("name"));
         lAddress.setCellValueFactory(new PropertyValueFactory<>("address"));
         lWebsite.setCellValueFactory(new PropertyValueFactory<>("website"));
@@ -143,7 +143,7 @@ public class CompanyController extends AbstractFxController<Company> {
                 saveAlert();
             } else {
                 company = new Company(getId(), getName(), getAddress(), getWebsite(), getEmail(), getPhoneNumber(), getDescription(), getType());
-                update(company);
+                updateAlert(company);
             }
             companyService.update(company);
 

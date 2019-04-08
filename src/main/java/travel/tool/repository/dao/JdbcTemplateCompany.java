@@ -1,11 +1,9 @@
 package travel.tool.repository.dao;
 
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import travel.tool.entity.Company;
 import travel.tool.entity.CompanyType;
 import travel.tool.repository.ICompanyRepository;

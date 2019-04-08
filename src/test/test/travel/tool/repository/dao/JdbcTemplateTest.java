@@ -1,9 +1,9 @@
 package travel.tool.repository.dao;
 
 import org.junit.jupiter.api.*;
-import travel.tool.util.ApplicationConfiguration;
 import travel.tool.entity.AbstractEntity;
 import travel.tool.repository.ICrudRepository;
+import travel.tool.util.ApplicationConfiguration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;

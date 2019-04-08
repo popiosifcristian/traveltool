@@ -9,7 +9,9 @@ import travel.tool.repository.ICustomerRepository;
 import javax.sql.DataSource;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import static travel.tool.util.TravelToolConstants.*;
 

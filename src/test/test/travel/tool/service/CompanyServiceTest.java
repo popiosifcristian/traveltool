@@ -7,8 +7,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import travel.tool.ApplicationConfigurationTest;
-import travel.tool.XmlConfigurationTest;
 import travel.tool.entity.Company;
 import travel.tool.entity.CompanyType;
 

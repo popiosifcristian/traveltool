@@ -2,7 +2,6 @@ package travel.tool.util;
 
 import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,6 @@ import travel.tool.repository.*;
 import travel.tool.repository.dao.*;
 
 import javax.sql.DataSource;
-import java.io.IOException;
 import java.util.ResourceBundle;
 
 /**

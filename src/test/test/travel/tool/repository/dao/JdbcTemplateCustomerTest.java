@@ -3,9 +3,6 @@ package travel.tool.repository.dao;
 import org.junit.jupiter.api.BeforeAll;
 import travel.tool.entity.Customer;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 /**
  * @author ipop
  */

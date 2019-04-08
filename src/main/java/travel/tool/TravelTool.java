@@ -11,7 +11,6 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.aspectj.EnableSpringConfigured;
 import travel.tool.util.FxmlView;
 import travel.tool.util.StageManager;
 
