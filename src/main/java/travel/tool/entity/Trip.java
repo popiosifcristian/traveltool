@@ -24,7 +24,7 @@ public class Trip extends AbstractEntity{
     private List<Customer> customerList;
 
     public Trip(Landmark landmark, Company transportCompany, LocalDate date, LocalTime startTime, double price,
-                int availablePlaces, List<Customer> customerList) {
+                int availablePlaces) {
         this.id = 0;
         this.landmark = landmark;
         this.transportCompany = transportCompany;
@@ -32,11 +32,10 @@ public class Trip extends AbstractEntity{
         this.startTime = startTime;
         this.price = price;
         this.availablePlaces = availablePlaces;
-        this.customerList = customerList;
     }
 
     public Trip(long id, Landmark landmark, Company transportCompany, LocalDate date, LocalTime startTime, double price,
-                int availablePlaces, List<Customer> customerList) {
+                int availablePlaces) {
         super(id);
         this.landmark = landmark;
         this.transportCompany = transportCompany;

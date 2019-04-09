@@ -62,12 +62,6 @@
                 <TextField fx:id="startTime" promptText="Start Time (HH:mm)"/>
                 <TextField fx:id="price" promptText="Price"/>
                 <TextField fx:id="availablePlaces" promptText="Available Places"/>
-                <VBox prefHeight="200.0" prefWidth="100.0">
-                    <children>
-                        <Label prefHeight="16.0" prefWidth="94.0" text="Customer list"/>
-                        <ListView fx:id="customerList" prefHeight="200.0" prefWidth="200.0"/>
-                    </children>
-                </VBox>
 
                 <Button fx:id="submit" mnemonicParsing="false" onAction="#submit" text="Submit"/>
                 <Button fx:id="clear" mnemonicParsing="false" onAction="#clearSelections" text="Clear Selections"/>
@@ -84,7 +78,6 @@
                 <TableColumn fx:id="lStartTime" prefWidth="130.0" text="Start Time"/>
                 <TableColumn fx:id="lPrice" prefWidth="130.0" text="Price"/>
                 <TableColumn fx:id="lAvailablePlaces" prefWidth="130.0" text="Available Places"/>
-                <TableColumn fx:id="lCustomerList" prefWidth="130.0" text="Customer List"/>
                 <TableColumn fx:id="lEdit" prefWidth="24.0"/>
                 <TableColumn fx:id="lDelete" prefWidth="24.0"/>
             </columns>

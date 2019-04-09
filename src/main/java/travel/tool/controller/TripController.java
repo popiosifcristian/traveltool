@@ -1,5 +1,6 @@
 package travel.tool.controller;
 
+import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -7,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,7 @@ import travel.tool.service.TripService;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
@@ -57,8 +60,6 @@ public class TripController extends AbstractFxController<Trip> {
     @FXML
     public TextField availablePlaces;
     @FXML
-    public ListView customerList;
-    @FXML
     public Button submit;
     @FXML
     public Button clear;
@@ -78,8 +79,6 @@ public class TripController extends AbstractFxController<Trip> {
     public TableColumn<Trip, Double> lPrice;
     @FXML
     public TableColumn<Trip, Integer> lAvailablePlaces;
-    @FXML
-    public TableColumn<Trip, String> lCustomerList;
     @FXML
     public TableColumn<Trip, Boolean> lEdit;
     @FXML
@@ -104,7 +103,6 @@ public class TripController extends AbstractFxController<Trip> {
         lStartTime.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getStartTime().toString()));
         lPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
         lAvailablePlaces.setCellValueFactory(new PropertyValueFactory<>("availablePlaces"));
-        lCustomerList.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCustomerList().toString()));
         lEdit.setCellFactory(editCellFactory);
         lDelete.setCellFactory(deleteCellFactory);
     }
@@ -118,7 +116,6 @@ public class TripController extends AbstractFxController<Trip> {
         startTime.setText(entity.getStartTime().toString());
         price.setText(String.valueOf(entity.getPrice()));
         availablePlaces.setText(String.valueOf(entity.getAvailablePlaces()));
-        customerList.setItems(FXCollections.observableArrayList(entity.getCustomerList()));
     }
 
     @Override
@@ -138,7 +135,6 @@ public class TripController extends AbstractFxController<Trip> {
         startTime.clear();
         price.clear();
         availablePlaces.clear();
-        customerList.getItems().clear();
         updateCompanyList();
         updateLandmarkList();
     }
@@ -160,11 +156,11 @@ public class TripController extends AbstractFxController<Trip> {
                 notEmptyValidation("Landmark", landmark.getSelectionModel().isEmpty())) {
             if (id.getText() == null || id.getText().isEmpty()) {
                 trip = new Trip(getLandmark(), getCompany(), getDate(), getStartTime(), getPrice(),
-                        getAvailablePlaces(), getCustomerList());
+                        getAvailablePlaces());
                 saveAlert();
             } else {
                 trip = new Trip(getId(), getLandmark(), getCompany(), getDate(), getStartTime(), getPrice(),
-                        getAvailablePlaces(), getCustomerList());
+                        getAvailablePlaces());
                 updateAlert(trip);
             }
             tripService.update(trip);
@@ -246,9 +242,5 @@ public class TripController extends AbstractFxController<Trip> {
 
     private Integer getAvailablePlaces() {
         return Integer.valueOf(availablePlaces.getText());
-    }
-
-    private List<Customer> getCustomerList() {
-        return customerList.getItems();
     }
 }

@@ -11,8 +11,10 @@ import travel.tool.repository.ILandmarkRepository;
 import travel.tool.repository.ITripRepository;
 
 import javax.sql.DataSource;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Collection;
@@ -52,7 +54,6 @@ public class JdbcTemplateTrip implements ITripRepository {
         return trip;
     }
 
-    //TODO: FIX THE DATE ISSUES
     @Override
     public Trip update(Trip trip) {
         Long newId;
@@ -60,8 +61,8 @@ public class JdbcTemplateTrip implements ITripRepository {
             newId = jdbcTemplate.queryForObject(TRIP_UPDATE, new Object[]{
                     trip.getLandmark().getId(),
                     trip.getTransportCompany().getId(),
-                    trip.getDate(),
-                    trip.getStartTime(),
+                    Date.valueOf(trip.getDate()),
+                    Time.valueOf(trip.getStartTime()),
                     trip.getPrice(),
                     trip.getAvailablePlaces(),
                     trip.getId()
@@ -70,8 +71,8 @@ public class JdbcTemplateTrip implements ITripRepository {
             newId = jdbcTemplate.queryForObject(TRIP_SAVE, new Object[]{
                     trip.getLandmark().getId(),
                     trip.getTransportCompany().getId(),
-                    trip.getDate(),
-                    trip.getStartTime(),
+                    Date.valueOf(trip.getDate()),
+                    Time.valueOf(trip.getStartTime()),
                     trip.getPrice(),
                     trip.getAvailablePlaces(),
             }, (resultSet, i) -> resultSet.getLong(1));
@@ -96,8 +97,10 @@ public class JdbcTemplateTrip implements ITripRepository {
                     trip.setId(resultSet.getLong("id"));
                     trip.setLandmark(landmarkRepository.findById(resultSet.getInt("landmark")));
                     trip.setTransportCompany(companyRepository.findById(resultSet.getInt("company")));
-                    trip.setDate(resultSet.getObject("date", LocalDate.class));
-                    trip.setStartTime(resultSet.getObject("start_time", LocalTime.class));
+                    Date date = (Date) resultSet.getObject("date");
+                    trip.setDate(date.toLocalDate());
+                    Time time = (Time) resultSet.getObject("start_time");
+                    trip.setStartTime(time.toLocalTime());
                     trip.setPrice(resultSet.getDouble("price"));
                     trip.setAvailablePlaces(resultSet.getInt("available_places"));
 
