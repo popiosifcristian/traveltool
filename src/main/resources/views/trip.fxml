@@ -9,6 +9,7 @@
     <top>
         <MenuBar BorderPane.alignment="TOP_LEFT">
             <Menu mnemonicParsing="false" text="Crud List">
+                <MenuItem mnemonicParsing="false" onAction="#switchBookingCrud" text="Booking Crud"/>
                 <MenuItem mnemonicParsing="false" onAction="#switchCompanyCrud" text="Company Crud"/>
                 <MenuItem mnemonicParsing="false" onAction="#switchCustomerCrud" text="Customer Crud"/>
                 <MenuItem mnemonicParsing="false" onAction="#switchEmployeeCrud" text="Employee Crud"/>

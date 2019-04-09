@@ -74,11 +74,17 @@
                     "available_places" INTEGER
                 );
 
-                CREATE TABLE "customer_trip"
+                CREATE SEQUENCE booking_seq;
+                CREATE TABLE "booking"
                 (
-                    "customer_id" BIGINT REFERENCES customer(id),
-                    "trip_id" BIGINT REFERENCES trip(id)
+                    "id" BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('booking_seq'),
+                    "trip" BIGINT,
+                    "customer" VARCHAR(100),
+                    "phone_number" VARCHAR(50),
+                    "tickets" INT
                 );
+
+
             ]]>
         </sql>
     </changeSet>

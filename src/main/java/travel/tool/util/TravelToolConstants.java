@@ -40,5 +40,11 @@ public final class TravelToolConstants {
     public static final String TRIP_UPDATE = "UPDATE trip SET landmark=?, company=?, date=?, start_time=?, price=?, available_places=? WHERE id=? returning id";
     public static final String TRIP_SAVE = "INSERT INTO trip (landmark, company, date, start_time, price, available_places) VALUES (?, ?, ?, ?, ?, ?) returning id";
 
+    //Booking queries for dao
+    public static final String BOOKING_GET_ALL = "SELECT b.id, b.trip, b.customer, b.phone_number, b.tickets FROM booking b ";
+    public static final String BOOKING_FIND_BY_ID = BOOKING_GET_ALL + "WHERE b.id=?";
+    public static final String BOOKING_DELETE_BY_ID = "DELETE FROM booking WHERE id=?";
+    public static final String BOOKING_UPDATE = "UPDATE booking SET trip=?, customer=?, phone_number=? tickets=? WHERE id=? returning id";
+    public static final String BOOKING_SAVE = "INSERT INTO booking (trip, customer, phone_number, tickets) VALUES (?, ?,  ?, ?) returning id";
 
 }

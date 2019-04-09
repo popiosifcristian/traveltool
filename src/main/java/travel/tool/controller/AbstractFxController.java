@@ -193,6 +193,11 @@ public abstract class AbstractFxController<T extends AbstractEntity> implements 
     }
 
     @FXML
+    protected void switchBookingCrud(ActionEvent event) {
+        stageManager.switchScene(FxmlView.BOOKING);
+    }
+
+    @FXML
     protected void logout(ActionEvent event) {
         stageManager.switchScene(FxmlView.LOGIN);
     }

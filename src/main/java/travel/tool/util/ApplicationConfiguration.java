@@ -77,6 +77,11 @@ public class ApplicationConfiguration {
     }
 
     @Bean
+    public IBookingRepository bookingRepository() {
+        return new JdbcTemplateBooking(dataSource());
+    }
+
+    @Bean
     public ResourceBundle resourceBundle() {
         return ResourceBundle.getBundle("Bundle");
     }
