@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import travel.tool.entity.Trip;
 import travel.tool.repository.ITripRepository;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,5 +32,9 @@ public class TripService {
 
     public boolean delete(Trip trip) {
         return tripRepository.delete(trip);
+    }
+
+    public List<Trip> searchByNameDateAndTime(String name, LocalDate date, LocalTime startTime) {
+        return tripRepository.searchByNameDateAndTime(name, date, startTime);
     }
 }

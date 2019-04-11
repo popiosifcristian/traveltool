@@ -23,4 +23,12 @@ public class Booking extends AbstractEntity {
         this.phoneNumber = phoneNumber;
         this.tickets = tickets;
     }
+
+    public Booking(Trip trip, String customer, String phoneNumber, int tickets) {
+        super(0);
+        this.trip = trip;
+        this.customer = customer;
+        this.phoneNumber = phoneNumber;
+        this.tickets = tickets;
+    }
 }

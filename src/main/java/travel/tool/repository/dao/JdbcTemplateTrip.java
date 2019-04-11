@@ -17,9 +17,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static travel.tool.util.TravelToolConstants.*;
 
@@ -84,6 +82,12 @@ public class JdbcTemplateTrip implements ITripRepository {
     @Override
     public boolean delete(Trip trip) {
         return jdbcTemplate.update(TRIP_DELETE_BY_ID, trip.getId()) > 0;
+    }
+
+    @Override
+    public List<Trip> searchByNameDateAndTime(String name, LocalDate date, LocalTime startTime) {
+        return new ArrayList<>(
+                jdbcTemplate.query(TRIP_GET_ALL_BY_NAME_DATE_TIME, new TripResultSetExtractor(), name, Date.valueOf(date), Time.valueOf(startTime)));
     }
 
     private class TripResultSetExtractor implements ResultSetExtractor<Collection<Trip>> {

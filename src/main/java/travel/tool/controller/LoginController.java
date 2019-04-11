@@ -34,8 +34,7 @@ public class LoginController {
 
     public void login(ActionEvent actionEvent) {
         if (employeeService.authenticate(getUsername(), getPassword())) {
-            stageManager.switchScene(FxmlView.COMPANY);
-
+            stageManager.switchScene(FxmlView.BOOKING);
         } else {
             lblLogin.setText("Login Failed.");
         }
