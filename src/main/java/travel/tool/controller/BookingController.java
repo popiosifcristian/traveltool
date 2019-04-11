@@ -98,9 +98,9 @@ public class BookingController extends AbstractFxController<Booking> {
 
     @Override
     protected void clearFields() {
-        id.setText(null);
-        tId.setText(null);
-        tName.setText(null);
+        id.setText("");
+        tId.setText("");
+        tName.setText("");
         cName.clear();
         cPhoneNumber.clear();
         tickets.clear();
@@ -116,8 +116,16 @@ public class BookingController extends AbstractFxController<Booking> {
 
     public void submit(ActionEvent actionEvent) {
         Booking booking;
-        if (notEmptyValidation("Trip", tId.getText().isEmpty())) {
+        if (notEmptyValidation("Trip", tId.getText().isEmpty())
+                && notEmptyValidation("Customer Name", cName.getText().isEmpty())
+                && notEmptyValidation("Customer Number", cPhoneNumber.getText().isEmpty())
+                && notEmptyValidation("Tickets Number", tickets.getText().isEmpty())) {
             if (id.getText() == null || id.getText().isEmpty()) {
+                int availablePlaces = tripService.getAvailablePlaces(getTrip().getId());
+                if (availablePlaces < getTickets()) {
+                    validationAlert("Available Places", false);
+                    return;
+                }
                 booking = new Booking(getTrip(), getCustomer(), getPhoneNumber(), getTickets());
                 tripService.updateAvailablePlaces(booking.getTrip().getId(),
                         booking.getTrip().getAvailablePlaces() - booking.getTickets());
