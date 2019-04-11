@@ -35,4 +35,9 @@ public class BookingService implements IBookingRepository {
     public boolean delete(Booking booking) {
         return bookingRepository.delete(booking);
     }
+
+    @Override
+    public int getTicketsById(long id) {
+        return bookingRepository.getTicketsById(id);
+    }
 }

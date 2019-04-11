@@ -79,6 +79,11 @@ public class JdbcTemplateBooking implements IBookingRepository {
         return jdbcTemplate.update(BOOKING_DELETE_BY_ID, booking.getId()) > 0;
     }
 
+    @Override
+    public int getTicketsById(long id) {
+        return jdbcTemplate.queryForObject(BOOKING_GET_TICKETS, new Object[]{id}, (resultSet, i) -> resultSet.getInt(1));
+    }
+
     private class BookingResultSetExtractor implements ResultSetExtractor<Collection<Booking>> {
         @Override
         public Collection<Booking> extractData(ResultSet resultSet) throws SQLException, DataAccessException {

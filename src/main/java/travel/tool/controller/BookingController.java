@@ -1,8 +1,6 @@
 package travel.tool.controller;
 
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -90,6 +88,8 @@ public class BookingController extends AbstractFxController<Booking> {
     @Override
     protected void delete(Booking entity) {
         if (deleteAlert()) {
+            tripService.updateAvailablePlaces(entity.getTrip().getId(),
+                    tripService.getAvailablePlaces(entity.getTrip().getId()) + entity.getTickets());
             bookingService.delete(entity);
         }
 
@@ -119,13 +119,34 @@ public class BookingController extends AbstractFxController<Booking> {
         if (notEmptyValidation("Trip", tId.getText().isEmpty())) {
             if (id.getText() == null || id.getText().isEmpty()) {
                 booking = new Booking(getTrip(), getCustomer(), getPhoneNumber(), getTickets());
+                tripService.updateAvailablePlaces(booking.getTrip().getId(),
+                        booking.getTrip().getAvailablePlaces() - booking.getTickets());
                 saveAlert();
             } else {
                 booking = new Booking(getId(), getTripId(), getCustomer(), getPhoneNumber(), getTickets());
+                int oldTicketsValue = bookingService.getTicketsById(booking.getId());
+                int ticketsDifference;
+                if (booking.getTickets() > oldTicketsValue) {
+                    ticketsDifference = booking.getTickets() - oldTicketsValue;
+                    int availablePlaces = tripService.getAvailablePlaces(booking.getTrip().getId());
+                    if (availablePlaces >= ticketsDifference) {
+                        tripService.updateAvailablePlaces(booking.getTrip().getId(),
+                                availablePlaces - ticketsDifference);
+                    } else {
+                        validationAlert("Available Places", false);
+                        return;
+                    }
+                } else {
+                    ticketsDifference = oldTicketsValue - booking.getTickets();
+                    tripService.updateAvailablePlaces(booking.getTrip().getId(),
+                            tripService.getAvailablePlaces(booking.getTrip().getId()) + ticketsDifference);
+                }
                 updateAlert(booking);
             }
             bookingService.update(booking);
-
+            if (stName.getText() != null) {
+                searchTrip(actionEvent);
+            }
             clearFields();
             loadDetails();
         }
@@ -162,7 +183,7 @@ public class BookingController extends AbstractFxController<Booking> {
                 if (empty || trip == null || trip.getLandmark().getName() == null) {
                     setText(null);
                 } else {
-                    setText(trip.getLandmark().getName());
+                    setText(trip.getLandmark().getName() + " - " + trip.getAvailablePlaces() + " places left");
                 }
             }
         });

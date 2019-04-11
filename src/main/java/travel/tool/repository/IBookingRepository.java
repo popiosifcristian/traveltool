@@ -6,4 +6,5 @@ import travel.tool.entity.Booking;
  * @author ipop
  */
 public interface IBookingRepository extends ICrudRepository<Booking> {
+    int getTicketsById(long id);
 }

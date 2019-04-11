@@ -11,4 +11,6 @@ import java.util.List;
  */
 public interface ITripRepository extends ICrudRepository<Trip> {
     List<Trip> searchByNameDateAndTime(String name, LocalDate date, LocalTime startTime);
+    void updateAvailablePlaces(long id, int availablePlaces);
+    int getAvailablePlaces(long id);
 }

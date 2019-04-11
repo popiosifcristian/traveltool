@@ -37,4 +37,12 @@ public class TripService {
     public List<Trip> searchByNameDateAndTime(String name, LocalDate date, LocalTime startTime) {
         return tripRepository.searchByNameDateAndTime(name, date, startTime);
     }
+
+    public void updateAvailablePlaces(long id, int availablePlaces) {
+        tripRepository.updateAvailablePlaces(id, availablePlaces);
+    }
+
+    public int getAvailablePlaces(long id) {
+        return tripRepository.getAvailablePlaces(id);
+    }
 }

@@ -90,6 +90,16 @@ public class JdbcTemplateTrip implements ITripRepository {
                 jdbcTemplate.query(TRIP_GET_ALL_BY_NAME_DATE_TIME, new TripResultSetExtractor(), name, Date.valueOf(date), Time.valueOf(startTime)));
     }
 
+    @Override
+    public void updateAvailablePlaces(long id, int availablePlaces) {
+        jdbcTemplate.update(TRIP_UPDATE_AVAILABLE_PLACES, availablePlaces, id);
+    }
+
+    @Override
+    public int getAvailablePlaces(long id) {
+        return jdbcTemplate.queryForObject(TRIP_GET_AVAILABLE_PLACES, new Object[]{id}, (resultSet, i) -> resultSet.getInt(1));
+    }
+
     private class TripResultSetExtractor implements ResultSetExtractor<Collection<Trip>> {
         @Override
         public Collection<Trip> extractData(ResultSet resultSet) throws SQLException, DataAccessException {

@@ -150,14 +150,18 @@ public abstract class AbstractFxController<T extends AbstractEntity> implements 
         }
     }
 
-    private void validationAlert(String field, boolean empty) {
+    protected void validationAlert(String field, boolean empty) {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Validation Error");
         alert.setHeaderText(null);
-        if (field.equals("Role")) alert.setContentText("Please Select " + field);
-        else {
-            if (empty) alert.setContentText("Please Enter " + field);
-            else alert.setContentText("Please Enter Valid " + field);
+        if (field.equals("Available Places")) {
+            alert.setContentText("Please select a number of tickets lower or equal to the actual available places for the trip.");
+        } else {
+            if (empty) {
+                alert.setContentText("Please Enter " + field);
+            } else {
+                alert.setContentText("Please Enter Valid " + field);
+            }
         }
         alert.showAndWait();
     }
