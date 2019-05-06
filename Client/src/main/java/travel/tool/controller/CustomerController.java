@@ -7,7 +7,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import travel.tool.model.Customer;
-import util.IServer;
+import util.IClientProtocol;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 @Controller
 public class CustomerController extends AbstractFxController<Customer> {
     @Autowired
-    private IServer server;
+    private IClientProtocol server;
 
     @FXML
     public Label id;

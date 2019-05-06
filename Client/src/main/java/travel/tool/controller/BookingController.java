@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import travel.tool.model.Booking;
 import travel.tool.model.Trip;
-import util.IServer;
+import util.IClientProtocol;
 
 import java.net.URL;
 import java.time.LocalTime;
@@ -23,7 +23,7 @@ import java.util.ResourceBundle;
 @Controller
 public class BookingController extends AbstractFxController<Booking> {
     @Autowired
-    private IServer server;
+    private IClientProtocol server;
     private ObservableList<Trip> tripSearchList = FXCollections.observableArrayList();
 
 

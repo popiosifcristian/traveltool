@@ -4,7 +4,7 @@ import travel.tool.model.*;
 import travel.tool.protocol.Request;
 import travel.tool.protocol.Response;
 import travel.tool.protocol.Type;
-import util.IServer;
+import util.IClientProtocol;
 
 import java.io.*;
 import java.net.Socket;
@@ -18,7 +18,7 @@ import static travel.tool.protocol.Type.*;
 /**
  * @author ipop
  */
-public class TravelToolClient implements IServer {
+public class TravelToolClient implements IClientProtocol {
     private volatile boolean connected;
     private Socket socket;
     private ObjectOutputStream writer;
@@ -297,7 +297,7 @@ public class TravelToolClient implements IServer {
 
     @Override
     public List<Trip> searchByNameDateAndTime(String name, LocalDate date, LocalTime startTime) {
-        sendRequest(new Request(SEARCH_BY_NAME_DATE_AND_TIME));
+        sendRequest(new Request(new Object[]{name, date, startTime}, SEARCH_BY_NAME_DATE_AND_TIME));
         Response response = receiveResponse(SEARCH_BY_NAME_DATE_AND_TIME);
         if (response != null) {
             return (List<Trip>) response.getData();

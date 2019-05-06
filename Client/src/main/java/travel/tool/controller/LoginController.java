@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Controller;
 import travel.tool.util.FxmlView;
 import travel.tool.util.StageManager;
-import util.IServer;
+import util.IClientProtocol;
 
 /**
  * @author ipop
@@ -19,7 +19,7 @@ import util.IServer;
 @Controller
 public class LoginController {
     @Autowired
-    private IServer server;
+    private IClientProtocol server;
     @Lazy
     @Autowired
     private StageManager stageManager;

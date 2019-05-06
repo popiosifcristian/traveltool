@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 import travel.tool.model.Company;
 import travel.tool.model.CompanyType;
 import travel.tool.model.Employee;
-import util.IServer;
+import util.IClientProtocol;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 public class EmployeeController extends AbstractFxController<Employee> {
 
     @Autowired
-    private IServer server;
+    private IClientProtocol server;
 
     private ObservableList<Company> companyList = FXCollections.observableArrayList();
 

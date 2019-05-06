@@ -1,6 +1,5 @@
 package travel.tool.controller;
 
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,18 +7,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Callback;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import travel.tool.model.*;
-import util.IServer;
+import util.IClientProtocol;
 
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -29,7 +24,7 @@ import java.util.stream.Collectors;
 public class TripController extends AbstractFxController<Trip> {
 
     @Autowired
-    private IServer server;
+    private IClientProtocol server;
 
     private ObservableList<Landmark> landmarkObservableList = FXCollections.observableArrayList();
     private ObservableList<Company> companyObservableList = FXCollections.observableArrayList();

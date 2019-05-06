@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author ipop
  */
-public interface IServer {
+public interface IClientProtocol {
     List<Booking> getAllBooking();
 
     Booking findBookingById(long id);
