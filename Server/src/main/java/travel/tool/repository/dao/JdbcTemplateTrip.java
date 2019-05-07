@@ -91,8 +91,8 @@ public class JdbcTemplateTrip implements ITripRepository {
     }
 
     @Override
-    public void updateAvailablePlaces(long id, int availablePlaces) {
-        jdbcTemplate.update(TRIP_UPDATE_AVAILABLE_PLACES, availablePlaces, id);
+    public int updateAvailablePlaces(long id, int availablePlaces) {
+        return jdbcTemplate.update(TRIP_UPDATE_AVAILABLE_PLACES, availablePlaces, id);
     }
 
     @Override

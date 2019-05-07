@@ -38,8 +38,8 @@ public class TripService {
         return tripRepository.searchByNameDateAndTime(name, date, startTime);
     }
 
-    public void updateAvailablePlaces(long id, int availablePlaces) {
-        tripRepository.updateAvailablePlaces(id, availablePlaces);
+    public int updateAvailablePlaces(long id, int availablePlaces) {
+        return tripRepository.updateAvailablePlaces(id, availablePlaces);
     }
 
     public int getAvailablePlaces(long id) {
