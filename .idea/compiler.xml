@@ -9,7 +9,6 @@
         <module name="Client" />
         <module name="Model" />
         <module name="Server" />
-        <module name="TravelTool" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

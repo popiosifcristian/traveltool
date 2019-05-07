@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author ipop
  */
-public interface IServerProtocol {
+public interface IServerProtocol extends Runnable{
     Response getAllBooking(Request request);
 
     Response findBookingById(Request request);

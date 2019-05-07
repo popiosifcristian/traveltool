@@ -1,17 +1,21 @@
 package travel.tool;
 
+import org.apache.log4j.Logger;
 import travel.tool.model.*;
 import travel.tool.protocol.Request;
 import travel.tool.protocol.Response;
 import travel.tool.protocol.Type;
 import util.IClientProtocol;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static travel.tool.protocol.Type.*;
 
@@ -19,6 +23,7 @@ import static travel.tool.protocol.Type.*;
  * @author ipop
  */
 public class TravelToolClientImpl implements IClientProtocol {
+    private static final Logger LOGGER = Logger.getLogger(TravelToolClientImpl.class);
     private volatile boolean connected;
     private Socket socket;
     private ObjectOutputStream writer;
@@ -27,11 +32,38 @@ public class TravelToolClientImpl implements IClientProtocol {
     public TravelToolClientImpl() {
         try {
             connected = true;
-            socket = new Socket("localhost", 444);
+            LOGGER.info("Started client on port: " + getSocketPort());
+            socket = new Socket("localhost", getSocketPort());
             writer = new ObjectOutputStream(socket.getOutputStream());
             reader = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    private void sendRequest(Request request) {
+        try {
+            writer.writeObject(request);
+            writer.flush();
+            LOGGER.info("Sent request: " + request.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private Response receiveResponse(Type requestType) {
+        Response response = null;
+        try {
+            response = (Response) reader.readObject();
+            LOGGER.info("Received response: " + response.toString());
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (requestType.equals(response.getType())) {
+            return response;
+        } else {
+            LOGGER.error("Bad response for request: " + requestType);
+            return response;
         }
     }
 
@@ -330,29 +362,7 @@ public class TravelToolClientImpl implements IClientProtocol {
         return false;
     }
 
-    private void sendRequest(Request request) {
-        System.out.println("Sending request: " + request);
-        try {
-            writer.writeObject(request);
-            writer.flush();
-        } catch (IOException e) {
-            System.err.println(e.getMessage());
-        }
-    }
-
-    private Response receiveResponse(Type requestType) {
-        Response response = null;
-        try {
-            response = (Response) reader.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (requestType.equals(response.getType())) {
-            System.out.println("Receiving response: " + response);
-            return response;
-        } else {
-            System.err.println("Bad response for request: " + requestType);
-            return response;
-        }
+    private int getSocketPort() {
+        return Integer.valueOf(ResourceBundle.getBundle("Bundle").getString("socket.port"));
     }
 }

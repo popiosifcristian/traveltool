@@ -1,10 +1,14 @@
 package travel.tool;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import travel.tool.model.*;
 import travel.tool.protocol.Request;
 import travel.tool.protocol.Response;
 import travel.tool.service.*;
+import travel.tool.util.ApplicationConfiguration;
 import util.IServerProtocol;
 
 import java.io.IOException;
@@ -16,11 +20,14 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ResourceBundle;
 
 /**
  * @author ipop
  */
+@Controller
 public class TravelToolServerImpl implements IServerProtocol, Runnable {
+    private static final Logger LOGGER = Logger.getLogger(TravelToolServerImpl.class);
     @Autowired
     private BookingService bookingService;
     @Autowired
@@ -41,54 +48,53 @@ public class TravelToolServerImpl implements IServerProtocol, Runnable {
 
     public TravelToolServerImpl() {
         try {
-            serverSocket = new ServerSocket(444);
+            serverSocket = new ServerSocket(getSocketPort());
+            LOGGER.info("Started server on port: " + getSocketPort());
+            LOGGER.info("Waiting client to connect: " + getSocketPort());
             clientSocket = serverSocket.accept();
+            LOGGER.info("Client connected server on port: " + getSocketPort());
             writer = new ObjectOutputStream(clientSocket.getOutputStream());
             reader = new ObjectInputStream(clientSocket.getInputStream());
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
     @Override
     public void run() {
         Request request;
-        try {
-            while (!serverSocket.isClosed()) {
-//                (request = (Request) reader.readObject()) != null
-                request = (Request) reader.readObject();
-                writer.writeObject(handleRequest(request));
-            }
-        } catch (IOException | ClassNotFoundException e) {
-            System.err.println(e.getMessage());
+        while (!serverSocket.isClosed()) {
+            request = receiveRequest();
+            sendResponse(handleRequest(request));
         }
     }
 
-    private Response handleRequest(Request request) {
+    private synchronized Response handleRequest(Request request) {
         Response response = null;
         try {
-            Method method = this.getClass().getDeclaredMethod(request.getType().getTypeName(), Response.class);
+            Method method = this.getClass().getDeclaredMethod(request.getType().getTypeName(), Request.class);
             response = (Response) method.invoke(this, request);
         } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return response;
     }
 
-    private void sendResponse(Response response) {
-        System.out.println("Sending response: " + response);
+    private synchronized void sendResponse(Response response) {
         try {
             writer.writeObject(response);
             writer.flush();
+            LOGGER.info("Sent response: " + response.toString());
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
-    private Request receiveRequest() {
+    private synchronized Request receiveRequest() {
         Request request = null;
         try {
             request = (Request) reader.readObject();
+            LOGGER.info("Received request: " + request.toString());
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -250,5 +256,9 @@ public class TravelToolServerImpl implements IServerProtocol, Runnable {
 
     private Response createResponse(Object data, Request request) {
         return new Response(data, request.getType());
+    }
+
+    private int getSocketPort() {
+        return Integer.valueOf(ResourceBundle.getBundle("Bundle").getString("socket.port"));
     }
 }
