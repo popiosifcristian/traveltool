@@ -1,6 +1,7 @@
 package travel.tool.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import travel.tool.model.Company;
 import travel.tool.repository.ICompanyRepository;
@@ -14,6 +15,7 @@ import java.util.List;
 @Service
 public class CompanyService implements ICompanyRepository {
     @Autowired
+    @Qualifier("jdbcTemplateCompany")
     private ICompanyRepository companyRepository;
 
     @Override

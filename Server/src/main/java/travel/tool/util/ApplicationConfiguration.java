@@ -1,13 +1,16 @@
 package travel.tool.util;
 
-import javafx.stage.Stage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.task.SimpleAsyncTaskExecutor;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
+import travel.tool.TravelToolServerImpl;
 import travel.tool.repository.*;
 import travel.tool.repository.dao.*;
 
@@ -29,6 +32,9 @@ public class ApplicationConfiguration {
     private String dataSourceUsername;
     @Value("${db.password}")
     private String dataSourcePassword;
+    @Autowired
+    @Lazy
+    private TravelToolServerImpl server;
 
     @Bean
     public DataSource dataSource() {
@@ -49,38 +55,50 @@ public class ApplicationConfiguration {
         return new SingleConnectionDataSource(url, false);
     }
 
-    @Bean
-    public ICustomerRepository customerRepository() {
-        return new JdbcTemplateCustomer(dataSource());
-    }
-
-    @Bean
-    public ICompanyRepository companyRepository() {
-        return new JdbcTemplateCompany(dataSource());
-    }
-
-    @Bean
-    public IEmployeeRepository employeeRepository() {
-        return new JdbcTemplateEmployee(dataSource());
-    }
-
-    @Bean
-    public ILandmarkRepository landmarkRepository() {
-        return new JdbcTemplateLandmark(dataSource());
-    }
-
-    @Bean
-    public ITripRepository tripRepository() {
-        return new JdbcTemplateTrip(dataSource());
-    }
-
-    @Bean
-    public IBookingRepository bookingRepository() {
-        return new JdbcTemplateBooking(dataSource());
-    }
+//    @Bean
+//    public ICustomerRepository customerRepository() {
+//        return new JdbcTemplateCustomer(dataSource());
+//    }
+//
+//    @Bean
+//    public ICompanyRepository companyRepository() {
+//        return new JdbcTemplateCompany(dataSource());
+//    }
+//
+//    @Bean
+//    public IEmployeeRepository employeeRepository() {
+//        return new JdbcTemplateEmployee(dataSource());
+//    }
+//
+//    @Bean
+//    public ILandmarkRepository landmarkRepository() {
+//        return new JdbcTemplateLandmark(dataSource());
+//    }
+//
+//    @Bean
+//    public ITripRepository tripRepository() {
+//        return new JdbcTemplateTrip(dataSource());
+//    }
+//
+//    @Bean
+//    public IBookingRepository bookingRepository() {
+//        return new JdbcTemplateBooking(dataSource());
+//    }
 
     @Bean
     public ResourceBundle resourceBundle() {
         return ResourceBundle.getBundle("Bundle");
     }
+
+    @Bean
+    public TaskExecutor taskExecutor() {
+        return new SimpleAsyncTaskExecutor();
+    }
+
+    @Bean
+    public CommandLineRunner schedulingRunner(TaskExecutor executor) {
+        return strings -> executor.execute(server);
+    }
+
+
 }

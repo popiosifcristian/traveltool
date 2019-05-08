@@ -1,6 +1,7 @@
 package travel.tool.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import travel.tool.model.Customer;
 import travel.tool.repository.ICustomerRepository;
@@ -15,6 +16,7 @@ import java.util.List;
 public class CustomerService implements ICustomerRepository {
 
     @Autowired
+    @Qualifier("jdbcTemplateCustomer")
     private ICustomerRepository customerRepository;
 
     public List<Customer> getAll() {

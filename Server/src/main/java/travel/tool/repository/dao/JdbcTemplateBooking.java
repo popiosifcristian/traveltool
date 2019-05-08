@@ -1,10 +1,12 @@
 package travel.tool.repository.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import travel.tool.model.Booking;
 import travel.tool.repository.IBookingRepository;
 import travel.tool.repository.ICustomerRepository;
@@ -22,9 +24,10 @@ import static travel.tool.util.TravelToolConstants.*;
 /**
  * @author ipop
  */
-@Component
+@Repository("jdbcTemplateBooking")
 public class JdbcTemplateBooking implements IBookingRepository {
     @Autowired
+    @Qualifier("jdbcTemplateCustomer")
     private ICustomerRepository customerRepository;
     @Autowired
     private ITripRepository tripRepository;

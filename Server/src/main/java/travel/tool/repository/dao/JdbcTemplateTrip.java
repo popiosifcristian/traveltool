@@ -2,9 +2,11 @@ package travel.tool.repository.dao;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.stereotype.Repository;
 import travel.tool.model.Trip;
 import travel.tool.repository.ICompanyRepository;
 import travel.tool.repository.ILandmarkRepository;
@@ -24,10 +26,13 @@ import static travel.tool.util.TravelToolConstants.*;
 /**
  * @author ipop
  */
+@Repository("jdbcTemplateTrip")
 public class JdbcTemplateTrip implements ITripRepository {
     @Autowired
+    @Qualifier("jdbcTemplateCompany")
     private ICompanyRepository companyRepository;
     @Autowired
+    @Qualifier("jdbcTemplateLandmark")
     private ILandmarkRepository landmarkRepository;
     private JdbcTemplate jdbcTemplate;
 

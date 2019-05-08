@@ -2,6 +2,7 @@ package travel.tool;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import travel.tool.model.*;
@@ -25,7 +26,7 @@ import java.util.ResourceBundle;
 /**
  * @author ipop
  */
-@Controller
+@Component
 public class TravelToolServerImpl implements IServerProtocol, Runnable {
     private static final Logger LOGGER = Logger.getLogger(TravelToolServerImpl.class);
     @Autowired

@@ -13,13 +13,11 @@ import org.springframework.context.annotation.ComponentScan;
  * @author ipop
  */
 @SpringBootApplication
-@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class})
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class,
+        HibernateJpaAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class})
 @ComponentScan(basePackages = {"travel.tool"})
 public class TravelToolServer {
     public static void main(String[] args) {
-        TravelToolServerImpl server = new TravelToolServerImpl();
-        server.run();
         SpringApplication.run(TravelToolServer.class, args);
     }
-
 }

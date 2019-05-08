@@ -3,6 +3,7 @@ package travel.tool.repository.dao;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
+import org.springframework.stereotype.Repository;
 import travel.tool.model.Customer;
 import travel.tool.repository.ICustomerRepository;
 
@@ -18,6 +19,7 @@ import static travel.tool.util.TravelToolConstants.*;
 /**
  * @author ipop
  */
+@Repository("jdbcTemplateCustomer")
 public class JdbcTemplateCustomer implements ICustomerRepository {
     private JdbcTemplate jdbcTemplate;
 

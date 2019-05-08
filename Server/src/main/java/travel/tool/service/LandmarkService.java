@@ -1,6 +1,7 @@
 package travel.tool.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import travel.tool.model.Landmark;
 import travel.tool.repository.ILandmarkRepository;
@@ -14,6 +15,7 @@ import java.util.List;
 @Service
 public class LandmarkService {
     @Autowired
+    @Qualifier("jdbcTemplateLandmark")
     private ILandmarkRepository landmarkRepository;
 
     public List<Landmark> getAll() {
