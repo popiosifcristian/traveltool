@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import travel.tool.model.*;
 import util.IClientProtocol;
 
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 /**
  * @author ipop
  */
+@Controller
 public class TripController extends AbstractFxController<Trip> {
 
     @Autowired

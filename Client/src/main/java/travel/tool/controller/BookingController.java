@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -185,7 +187,13 @@ public class BookingController extends AbstractFxController<Booking> {
                 if (empty || trip == null || trip.getLandmark().getName() == null) {
                     setText(null);
                 } else {
-                    setText(trip.getLandmark().getName() + " - " + trip.getAvailablePlaces() + " places left");
+                    setText(trip.getLandmark().getName() + " | " + trip.getAvailablePlaces() + " places left | price " +
+                            trip.getPrice() + " | " + trip.getTransportCompany().getName());
+                    if (trip.getAvailablePlaces() == 0) {
+                        setTextFill(Color.RED);
+                    } else{
+                        setTextFill(Color.BLACK);
+                    }
                 }
             }
         });
