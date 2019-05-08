@@ -1,26 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>travel.tool</groupId>
-    <artifactId>TravelTool</artifactId>
+    <artifactId>model</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>TravelTool</name>
-    <description>Travel Tool Project</description>
+    <name>Model</name>
 
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>1.5.2.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
-    <packaging>pom</packaging>
-
-    <modules>
-        <module>Client</module>
-        <module>Server</module>
-        <module>Model</module>
-    </modules>
 
     <build>
         <plugins>
@@ -46,4 +33,13 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 </project>
