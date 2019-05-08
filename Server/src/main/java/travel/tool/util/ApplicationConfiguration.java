@@ -11,8 +11,6 @@ import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import travel.tool.TravelToolServerImpl;
-import travel.tool.repository.*;
-import travel.tool.repository.dao.*;
 
 import javax.sql.DataSource;
 import java.util.ResourceBundle;

@@ -1,12 +1,7 @@
 package util;
 
-import travel.tool.model.*;
 import travel.tool.protocol.Request;
 import travel.tool.protocol.Response;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.List;
 
 /**
  * @author ipop

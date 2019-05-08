@@ -6,7 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
 import javafx.scene.paint.Color;
 import javafx.util.StringConverter;
 import org.springframework.beans.factory.annotation.Autowired;

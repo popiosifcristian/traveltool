@@ -27,12 +27,12 @@ public class CustomerService implements ICustomerRepository {
         return customerRepository.findById(id);
     }
 
-    public Customer update(Customer customer) {
-        return customerRepository.update(customer);
+    public Customer save(Customer customer) {
+        return customerRepository.save(customer);
     }
 
-    public boolean delete(Customer customer) {
-        return customerRepository.delete(customer);
+    public void delete(Customer customer) {
+        customerRepository.delete(customer);
     }
 }
 

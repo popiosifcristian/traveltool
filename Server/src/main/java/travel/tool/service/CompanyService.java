@@ -29,12 +29,12 @@ public class CompanyService implements ICompanyRepository {
     }
 
     @Override
-    public Company update(Company company) {
-        return companyRepository.update(company);
+    public Company save(Company company) {
+        return companyRepository.save(company);
     }
 
     @Override
-    public boolean delete(Company company) {
-        return companyRepository.delete(company);
+    public void delete(Company company) {
+        companyRepository.delete(company);
     }
 }

@@ -26,11 +26,11 @@ public class LandmarkService {
         return landmarkRepository.findById(id);
     }
 
-    public Landmark update(Landmark landmark) {
-        return landmarkRepository.update(landmark);
+    public Landmark save(Landmark landmark) {
+        return landmarkRepository.save(landmark);
     }
 
-    public boolean delete(Landmark landmark) {
-        return landmarkRepository.delete(landmark);
+    public void delete(Landmark landmark) {
+        landmarkRepository.delete(landmark);
     }
 }

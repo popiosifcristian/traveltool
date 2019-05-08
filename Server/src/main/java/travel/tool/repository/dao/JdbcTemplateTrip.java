@@ -58,7 +58,7 @@ public class JdbcTemplateTrip implements ITripRepository {
     }
 
     @Override
-    public Trip update(Trip trip) {
+    public Trip save(Trip trip) {
         Long newId;
         if (trip.getId() > 0) {
             newId = jdbcTemplate.queryForObject(TRIP_UPDATE, new Object[]{
@@ -85,8 +85,8 @@ public class JdbcTemplateTrip implements ITripRepository {
     }
 
     @Override
-    public boolean delete(Trip trip) {
-        return jdbcTemplate.update(TRIP_DELETE_BY_ID, trip.getId()) > 0;
+    public void delete(Trip trip) {
+        jdbcTemplate.update(TRIP_DELETE_BY_ID, trip.getId());
     }
 
     @Override

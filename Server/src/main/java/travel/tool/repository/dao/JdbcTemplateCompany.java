@@ -3,7 +3,6 @@ package travel.tool.repository.dao;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import travel.tool.model.Company;
 import travel.tool.model.CompanyType;
@@ -47,7 +46,7 @@ public class JdbcTemplateCompany implements ICompanyRepository {
     }
 
     @Override
-    public Company update(Company company) {
+    public Company save(Company company) {
         Long newId;
         if (company.getId() > 0) {
             newId = jdbcTemplate.queryForObject(COMPANY_UPDATE, new Object[]{
@@ -76,8 +75,8 @@ public class JdbcTemplateCompany implements ICompanyRepository {
     }
 
     @Override
-    public boolean delete(Company company) {
-        return jdbcTemplate.update(COMPANY_DELETE_BY_ID, company.getId()) > 0;
+    public void delete(Company company) {
+        jdbcTemplate.update(COMPANY_DELETE_BY_ID, company.getId());
     }
 
 

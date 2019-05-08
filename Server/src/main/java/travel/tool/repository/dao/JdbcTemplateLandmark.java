@@ -44,7 +44,7 @@ public class JdbcTemplateLandmark implements ILandmarkRepository {
         return landmark;    }
 
     @Override
-    public Landmark update(Landmark landmark) {
+    public Landmark save(Landmark landmark) {
         Long newId;
         if (landmark.getId() > 0) {
             newId = jdbcTemplate.queryForObject(LANDMARK_UPDATE, new Object[]{
@@ -64,8 +64,8 @@ public class JdbcTemplateLandmark implements ILandmarkRepository {
         return landmark;    }
 
     @Override
-    public boolean delete(Landmark landmark) {
-        return jdbcTemplate.update(LANDMARK_DELETE_BY_ID, landmark.getId()) > 0;
+    public void delete(Landmark landmark) {
+        jdbcTemplate.update(LANDMARK_DELETE_BY_ID, landmark.getId());
     }
 
     private static class LandmarkResultSetExtractor implements ResultSetExtractor<Collection<Landmark>> {

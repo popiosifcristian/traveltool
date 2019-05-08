@@ -1,7 +1,5 @@
 package travel.tool.repository;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.Collection;
 
 /**
@@ -13,9 +11,9 @@ public interface ICrudRepository<T> {
 
     T findById(long id);
 
-    T update(T model);
+    T save(T model);
 
-    boolean delete(T model);
+    void delete(T model);
 
     default void tearDown() {
         getAll().forEach(this::delete);

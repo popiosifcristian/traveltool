@@ -45,7 +45,7 @@ public class JdbcTemplateCustomer implements ICustomerRepository {
     }
 
     @Override
-    public Customer update(Customer customer) {
+    public Customer save(Customer customer) {
         Long newId;
         if (customer.getId() > 0) {
             newId = jdbcTemplate.queryForObject(CUSTOMER_UPDATE, new Object[]{
@@ -68,8 +68,8 @@ public class JdbcTemplateCustomer implements ICustomerRepository {
     }
 
     @Override
-    public boolean delete(Customer customer) {
-        return jdbcTemplate.update(CUSTOMER_DELETE_BY_ID, customer.getId()) > 0;
+    public void delete(Customer customer) {
+        jdbcTemplate.update(CUSTOMER_DELETE_BY_ID, customer.getId());
     }
 
     private static class CustomerResultSetExtractor implements ResultSetExtractor<Collection<Customer>> {

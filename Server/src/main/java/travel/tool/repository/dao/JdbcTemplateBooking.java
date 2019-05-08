@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import travel.tool.model.Booking;
 import travel.tool.repository.IBookingRepository;
@@ -55,7 +54,7 @@ public class JdbcTemplateBooking implements IBookingRepository {
     }
 
     @Override
-    public Booking update(Booking booking) {
+    public Booking save(Booking booking) {
         Long newId;
         if (booking.getId() > 0) {
             newId = jdbcTemplate.queryForObject(BOOKING_UPDATE, new Object[]{
@@ -78,8 +77,8 @@ public class JdbcTemplateBooking implements IBookingRepository {
     }
 
     @Override
-    public boolean delete(Booking booking) {
-        return jdbcTemplate.update(BOOKING_DELETE_BY_ID, booking.getId()) > 0;
+    public void delete(Booking booking) {
+        jdbcTemplate.update(BOOKING_DELETE_BY_ID, booking.getId());
     }
 
     @Override

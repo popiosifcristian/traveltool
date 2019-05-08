@@ -51,7 +51,7 @@ public class JdbcTemplateEmployee implements IEmployeeRepository {
     }
 
     @Override
-    public Employee update(Employee employee) {
+    public Employee save(Employee employee) {
         Long newId;
         if (employee.getId() > 0) {
             newId = jdbcTemplate.queryForObject(EMPLOYEE_UPDATE, new Object[]{
@@ -80,8 +80,8 @@ public class JdbcTemplateEmployee implements IEmployeeRepository {
     }
 
     @Override
-    public boolean delete(Employee employee) {
-        return jdbcTemplate.update(EMPLOYEE_DELETE_BY_ID, employee.getId()) > 0;
+    public void delete(Employee employee) {
+        jdbcTemplate.update(EMPLOYEE_DELETE_BY_ID, employee.getId());
     }
 
     @Override
