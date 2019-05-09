@@ -34,12 +34,12 @@ public class JdbcTemplateEmployee implements IEmployeeRepository {
     }
 
     @Override
-    public Collection<Employee> getAll() {
+    public Collection<Employee> findAll() {
         return jdbcTemplate.query(EMPLOYEE_GET_ALL, new EmployeeResultSetExtractor());
     }
 
     @Override
-    public Employee findById(long id) {
+    public Employee getOne(long id) {
         Collection<Employee> employees = jdbcTemplate.query(EMPLOYEE_FIND_BY_ID, new EmployeeResultSetExtractor(), id);
         Employee employee;
         if (employees.size() != 1) {
@@ -111,7 +111,7 @@ public class JdbcTemplateEmployee implements IEmployeeRepository {
                     employee.setFirstName(resultSet.getString("first_name"));
                     employee.setLastName(resultSet.getString("last_name"));
                     employee.setPhoneNumber(resultSet.getString("phone_number"));
-                    employee.setAgency(companyRepository.findById(resultSet.getLong("company")));
+                    employee.setAgency(companyRepository.getOne(resultSet.getLong("company")));
 
                     employeeMap.put(employee.getId(), employee);
                 }

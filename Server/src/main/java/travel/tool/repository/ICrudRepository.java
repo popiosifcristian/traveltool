@@ -7,15 +7,15 @@ import java.util.Collection;
  */
 public interface ICrudRepository<T> {
 
-    Collection<T> getAll();
+    Collection<T> findAll();
 
-    T findById(long id);
+    T getOne(long id);
 
     T save(T model);
 
     void delete(T model);
 
     default void tearDown() {
-        getAll().forEach(this::delete);
+        findAll().forEach(this::delete);
     }
 }

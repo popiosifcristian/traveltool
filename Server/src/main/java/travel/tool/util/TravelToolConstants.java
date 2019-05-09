@@ -50,5 +50,4 @@ public final class TravelToolConstants {
     public static final String BOOKING_UPDATE = "UPDATE booking SET trip=?, customer=?, phone_number=?, tickets=? WHERE id=? returning id";
     public static final String BOOKING_SAVE = "INSERT INTO booking (trip, customer, phone_number, tickets) VALUES (?, ?,  ?, ?) returning id";
     public static final String BOOKING_GET_TICKETS = "SELECT b.tickets FROM booking b WHERE b.id=?";
-
 }

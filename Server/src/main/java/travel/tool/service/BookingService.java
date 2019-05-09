@@ -18,12 +18,12 @@ public class BookingService {
     @Qualifier("jdbcTemplateBooking")
     private IBookingRepository bookingRepository;
 
-    public List<Booking> getAll() {
-        return new ArrayList<>(bookingRepository.getAll());
+    public List<Booking> findAll() {
+        return new ArrayList<>(bookingRepository.findAll());
     }
 
-    public Booking findById(long id) {
-        return bookingRepository.findById(id);
+    public Booking getOne(long id) {
+        return bookingRepository.getOne(id);
     }
 
     public Booking save(Booking booking) {

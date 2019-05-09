@@ -15,17 +15,17 @@ import java.util.List;
 @Service
 public class CompanyService implements ICompanyRepository {
     @Autowired
-    @Qualifier("jdbcTemplateCompany")
+    @Qualifier("companyRepository")
     private ICompanyRepository companyRepository;
 
     @Override
-    public List<Company> getAll() {
-        return new ArrayList<>(companyRepository.getAll());
+    public List<Company> findAll() {
+        return new ArrayList<>(companyRepository.findAll());
     }
 
     @Override
-    public Company findById(long id) {
-        return companyRepository.findById(id);
+    public Company getOne(long id) {
+        return companyRepository.getOne(id);
     }
 
     @Override

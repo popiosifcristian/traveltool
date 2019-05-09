@@ -41,12 +41,12 @@ public class JdbcTemplateTrip implements ITripRepository {
     }
 
     @Override
-    public Collection<Trip> getAll() {
+    public Collection<Trip> findAll() {
         return jdbcTemplate.query(TRIP_GET_ALL, new TripResultSetExtractor());
     }
 
     @Override
-    public Trip findById(long id) {
+    public Trip getOne(long id) {
         Collection<Trip> trips = jdbcTemplate.query(TRIP_FIND_BY_ID, new TripResultSetExtractor(), id);
         Trip trip;
         if (trips.size() != 1) {
@@ -90,7 +90,7 @@ public class JdbcTemplateTrip implements ITripRepository {
     }
 
     @Override
-    public List<Trip> searchByNameDateAndTime(String name, LocalDate date, LocalTime startTime) {
+    public List<Trip> findByLandmarkNameAndDateAndAndStartTime(String name, LocalDate date, LocalTime startTime) {
         return new ArrayList<>(
                 jdbcTemplate.query(TRIP_GET_ALL_BY_NAME_DATE_TIME, new TripResultSetExtractor(), name, Date.valueOf(date), Time.valueOf(startTime)));
     }
@@ -101,7 +101,7 @@ public class JdbcTemplateTrip implements ITripRepository {
     }
 
     @Override
-    public int getAvailablePlaces(long id) {
+    public int getAvailablePlacesById(long id) {
         return jdbcTemplate.queryForObject(TRIP_GET_AVAILABLE_PLACES, new Object[]{id}, (resultSet, i) -> resultSet.getInt(1));
     }
 
@@ -114,8 +114,8 @@ public class JdbcTemplateTrip implements ITripRepository {
                 if (!tripMap.keySet().contains(resultSet.getLong("id"))) {
                     Trip trip = new Trip();
                     trip.setId(resultSet.getLong("id"));
-                    trip.setLandmark(landmarkRepository.findById(resultSet.getInt("landmark")));
-                    trip.setTransportCompany(companyRepository.findById(resultSet.getInt("company")));
+                    trip.setLandmark(landmarkRepository.getOne(resultSet.getInt("landmark")));
+                    trip.setTransportCompany(companyRepository.getOne(resultSet.getInt("company")));
                     Date date = (Date) resultSet.getObject("date");
                     trip.setDate(date.toLocalDate());
                     Time time = (Time) resultSet.getObject("start_time");

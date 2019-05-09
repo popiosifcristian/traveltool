@@ -15,15 +15,15 @@ import java.util.List;
 @Service
 public class EmployeeService implements IEmployeeRepository {
     @Autowired
-    @Qualifier("jdbcTemplateEmployee")
+    @Qualifier("employeeRepository")
     private IEmployeeRepository employeeRepository;
 
-    public List<Employee> getAll() {
-        return new ArrayList<>(employeeRepository.getAll());
+    public List<Employee> findAll() {
+        return new ArrayList<>(employeeRepository.findAll());
     }
 
-    public Employee findById(long id) {
-        return employeeRepository.findById(id);
+    public Employee getOne(long id) {
+        return employeeRepository.getOne(id);
     }
 
     public Employee save(Employee customer) {

@@ -29,12 +29,12 @@ public class JdbcTemplateCompany implements ICompanyRepository {
     }
 
     @Override
-    public Collection<Company> getAll() {
+    public Collection<Company> findAll() {
         return jdbcTemplate.query(COMPANY_GET_ALL, new CompanyResultSetExtractor());
     }
 
     @Override
-    public Company findById(long id) {
+    public Company getOne(long id) {
         Collection<Company> companies = jdbcTemplate.query(COMPANY_FIND_BY_ID, new CompanyResultSetExtractor(), id);
         Company company;
         if (companies.size() != 1) {

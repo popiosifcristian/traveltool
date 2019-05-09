@@ -15,15 +15,15 @@ import java.util.List;
 @Service
 public class LandmarkService {
     @Autowired
-    @Qualifier("jdbcTemplateLandmark")
+    @Qualifier("landmarkRepository")
     private ILandmarkRepository landmarkRepository;
 
-    public List<Landmark> getAll() {
-        return new ArrayList<>(landmarkRepository.getAll());
+    public List<Landmark> findAll() {
+        return new ArrayList<>(landmarkRepository.findAll());
     }
 
-    public Landmark findById(long id) {
-        return landmarkRepository.findById(id);
+    public Landmark getOne(long id) {
+        return landmarkRepository.getOne(id);
     }
 
     public Landmark save(Landmark landmark) {

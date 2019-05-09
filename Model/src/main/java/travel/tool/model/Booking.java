@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -12,10 +13,18 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
+@Entity
+@Table(name = "booking")
 public class Booking extends AbstractEntity implements Serializable {
+    private static final long serialVersionUID = 6643583622925481529L;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "trip")
     private Trip trip;
+    @Column(name = "customer")
     private String customer;
+    @Column(name = "phone_number")
     private String phoneNumber;
+    @Column(name = "tickets")
     private int tickets;
 
     public Booking(long id, Trip trip, String customer, String phoneNumber, int tickets) {

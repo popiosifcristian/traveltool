@@ -16,15 +16,15 @@ import java.util.List;
 public class CustomerService implements ICustomerRepository {
 
     @Autowired
-    @Qualifier("jdbcTemplateCustomer")
+    @Qualifier("customerRepository")
     private ICustomerRepository customerRepository;
 
-    public List<Customer> getAll() {
-        return new ArrayList<>(customerRepository.getAll());
+    public List<Customer> findAll() {
+        return new ArrayList<>(customerRepository.findAll());
     }
 
-    public Customer findById(long id) {
-        return customerRepository.findById(id);
+    public Customer getOne(long id) {
+        return customerRepository.getOne(id);
     }
 
     public Customer save(Customer customer) {

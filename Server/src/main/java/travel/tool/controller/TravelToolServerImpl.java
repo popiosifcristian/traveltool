@@ -1,4 +1,4 @@
-package travel.tool;
+package travel.tool.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,12 +101,12 @@ public class TravelToolServerImpl implements IServerProtocol, Runnable {
 
     @Override
     public Response getAllBooking(Request request) {
-        return createResponse(bookingService.getAll(), request);
+        return createResponse(bookingService.findAll(), request);
     }
 
     @Override
     public Response findBookingById(Request request) {
-        return createResponse(bookingService.findById((Long) request.getData()), request);
+        return createResponse(bookingService.getOne((Long) request.getData()), request);
     }
 
     @Override
@@ -122,12 +122,12 @@ public class TravelToolServerImpl implements IServerProtocol, Runnable {
 
     @Override
     public Response getAllCompany(Request request) {
-        return createResponse(companyService.getAll(), request);
+        return createResponse(companyService.findAll(), request);
     }
 
     @Override
     public Response findCompanyById(Request request) {
-        return createResponse(companyService.findById((Long) request.getData()), request);
+        return createResponse(companyService.getOne((Long) request.getData()), request);
     }
 
     @Override
@@ -143,12 +143,12 @@ public class TravelToolServerImpl implements IServerProtocol, Runnable {
 
     @Override
     public Response getAllCustomer(Request request) {
-        return createResponse(customerService.getAll(), request);
+        return createResponse(customerService.findAll(), request);
     }
 
     @Override
     public Response findCustomerById(Request request) {
-        return createResponse(customerService.findById((Long) request.getData()), request);
+        return createResponse(customerService.getOne((Long) request.getData()), request);
     }
 
     @Override
@@ -164,12 +164,12 @@ public class TravelToolServerImpl implements IServerProtocol, Runnable {
 
     @Override
     public Response getAllEmployee(Request request) {
-        return createResponse(employeeService.getAll(), request);
+        return createResponse(employeeService.findAll(), request);
     }
 
     @Override
     public Response findEmployeeById(Request request) {
-        return createResponse(employeeService.findById((Long) request.getData()), request);
+        return createResponse(employeeService.getOne((Long) request.getData()), request);
     }
 
     @Override
@@ -185,12 +185,12 @@ public class TravelToolServerImpl implements IServerProtocol, Runnable {
 
     @Override
     public Response getAllLandmark(Request request) {
-        return createResponse(landmarkService.getAll(), request);
+        return createResponse(landmarkService.findAll(), request);
     }
 
     @Override
     public Response findLandmarkById(Request request) {
-        return createResponse(landmarkService.findById((Long) request.getData()), request);
+        return createResponse(landmarkService.getOne((Long) request.getData()), request);
     }
 
     @Override
@@ -206,12 +206,12 @@ public class TravelToolServerImpl implements IServerProtocol, Runnable {
 
     @Override
     public Response getAllTrip(Request request) {
-        return createResponse(tripService.getAll(), request);
+        return createResponse(tripService.findAll(), request);
     }
 
     @Override
     public Response findTripById(Request request) {
-        return createResponse(tripService.findById((Long) request.getData()), request);
+        return createResponse(tripService.getOne((Long) request.getData()), request);
     }
 
     @Override

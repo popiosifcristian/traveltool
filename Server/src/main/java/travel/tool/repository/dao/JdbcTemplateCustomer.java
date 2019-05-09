@@ -28,12 +28,12 @@ public class JdbcTemplateCustomer implements ICustomerRepository {
     }
 
     @Override
-    public Collection<Customer> getAll() {
+    public Collection<Customer> findAll() {
         return jdbcTemplate.query(CUSTOMER_GET_ALL, new CustomerResultSetExtractor());
     }
 
     @Override
-    public Customer findById(long id) {
+    public Customer getOne(long id) {
         Collection<Customer> customers = jdbcTemplate.query(CUSTOMER_FIND_BY_ID, new CustomerResultSetExtractor(), id);
         Customer customer;
         if (customers.size() != 1) {

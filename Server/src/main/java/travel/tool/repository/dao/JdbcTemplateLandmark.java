@@ -28,12 +28,12 @@ public class JdbcTemplateLandmark implements ILandmarkRepository {
     }
 
     @Override
-    public Collection<Landmark> getAll() {
+    public Collection<Landmark> findAll() {
         return jdbcTemplate.query(LANDMARK_GET_ALL, new LandmarkResultSetExtractor());
     }
 
     @Override
-    public Landmark findById(long id) {
+    public Landmark getOne(long id) {
         Collection<Landmark> landmarks = jdbcTemplate.query(LANDMARK_FIND_BY_ID, new LandmarkResultSetExtractor(), id);
         Landmark landmark;
         if (landmarks.size() != 1) {
