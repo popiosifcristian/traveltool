@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
-import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import travel.tool.controller.TravelToolServerImpl;
 
 import javax.sql.DataSource;
