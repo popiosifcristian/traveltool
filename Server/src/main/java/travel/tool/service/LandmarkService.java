@@ -15,22 +15,22 @@ import java.util.List;
 @Service
 public class LandmarkService {
     @Autowired
-    @Qualifier("jdbcTemplateLandmark")
+    @Qualifier("landmarkRepository")
     private ILandmarkRepository landmarkRepository;
 
-    public List<Landmark> getAll() {
-        return new ArrayList<>(landmarkRepository.getAll());
+    public List<Landmark> findAll() {
+        return new ArrayList<>(landmarkRepository.findAll());
     }
 
-    public Landmark findById(long id) {
-        return landmarkRepository.findById(id);
+    public Landmark getOne(long id) {
+        return landmarkRepository.getOne(id);
     }
 
-    public Landmark update(Landmark landmark) {
-        return landmarkRepository.update(landmark);
+    public Landmark save(Landmark landmark) {
+        return landmarkRepository.save(landmark);
     }
 
-    public boolean delete(Landmark landmark) {
-        return landmarkRepository.delete(landmark);
+    public void delete(Landmark landmark) {
+        landmarkRepository.delete(landmark);
     }
 }

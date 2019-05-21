@@ -20,24 +20,24 @@ public class TripService {
     @Qualifier("jdbcTemplateTrip")
     private ITripRepository tripRepository;
 
-    public List<Trip> getAll() {
-        return new ArrayList<>(tripRepository.getAll());
+    public List<Trip> findAll() {
+        return new ArrayList<>(tripRepository.findAll());
     }
 
-    public Trip findById(long id) {
-        return tripRepository.findById(id);
+    public Trip getOne(long id) {
+        return tripRepository.getOne(id);
     }
 
-    public Trip update(Trip trip) {
-        return tripRepository.update(trip);
+    public Trip save(Trip trip) {
+        return tripRepository.save(trip);
     }
 
-    public boolean delete(Trip trip) {
-        return tripRepository.delete(trip);
+    public void delete(Trip trip) {
+        tripRepository.delete(trip);
     }
 
     public List<Trip> searchByNameDateAndTime(String name, LocalDate date, LocalTime startTime) {
-        return tripRepository.searchByNameDateAndTime(name, date, startTime);
+        return tripRepository.findByLandmarkNameAndDateAndAndStartTime(name, date, startTime);
     }
 
     public int updateAvailablePlaces(long id, int availablePlaces) {
@@ -45,6 +45,6 @@ public class TripService {
     }
 
     public int getAvailablePlaces(long id) {
-        return tripRepository.getAvailablePlaces(id);
+        return tripRepository.getAvailablePlacesById(id);
     }
 }

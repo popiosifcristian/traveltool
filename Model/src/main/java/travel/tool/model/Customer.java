@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -12,14 +13,21 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
+@Entity
+@Table(name = "customer")
 public class Customer extends AbstractEntity implements Serializable {
+    private static final long serialVersionUID = 3374155984558133190L;
+    @Column(name = "first_name")
     private String firstName;
+    @Column(name = "last_name")
     private String lastName;
+    @Column(name = "email")
     private String email;
+    @Column(name = "phone_number")
     private String phoneNumber;
 
     public Customer(String firstName, String lastName, String email, String phoneNumber) {
-        this.id = 0;
+        super(0L);
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;

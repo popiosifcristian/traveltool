@@ -10,7 +10,7 @@ import java.util.List;
  * @author ipop
  */
 public interface ITripRepository extends ICrudRepository<Trip> {
-    List<Trip> searchByNameDateAndTime(String name, LocalDate date, LocalTime startTime);
+    List<Trip> findByLandmarkNameAndDateAndAndStartTime(String landmarkName, LocalDate date, LocalTime startTime);
     int updateAvailablePlaces(long id, int availablePlaces);
-    int getAvailablePlaces(long id);
+    int getAvailablePlacesById(long id);
 }

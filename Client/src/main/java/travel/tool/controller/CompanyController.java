@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import travel.tool.model.Company;
 import travel.tool.model.CompanyType;
-
 import util.IClientProtocol;
 
 import java.net.URL;

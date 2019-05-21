@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.ResultSetExtractor;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import travel.tool.model.Booking;
 import travel.tool.repository.IBookingRepository;
@@ -27,9 +26,7 @@ import static travel.tool.util.TravelToolConstants.*;
 @Repository("jdbcTemplateBooking")
 public class JdbcTemplateBooking implements IBookingRepository {
     @Autowired
-    @Qualifier("jdbcTemplateCustomer")
-    private ICustomerRepository customerRepository;
-    @Autowired
+    @Qualifier("jdbcTemplateTrip")
     private ITripRepository tripRepository;
     private JdbcTemplate jdbcTemplate;
 
@@ -38,12 +35,12 @@ public class JdbcTemplateBooking implements IBookingRepository {
     }
 
     @Override
-    public Collection<Booking> getAll() {
+    public Collection<Booking> findAll() {
         return jdbcTemplate.query(BOOKING_GET_ALL, new BookingResultSetExtractor());
     }
 
     @Override
-    public Booking findById(long id) {
+    public Booking getOne(long id) {
         Collection<Booking> bookings = jdbcTemplate.query(BOOKING_FIND_BY_ID, new BookingResultSetExtractor(), id);
         Booking booking;
         if (bookings.size() != 1) {
@@ -55,7 +52,7 @@ public class JdbcTemplateBooking implements IBookingRepository {
     }
 
     @Override
-    public Booking update(Booking booking) {
+    public Booking save(Booking booking) {
         Long newId;
         if (booking.getId() > 0) {
             newId = jdbcTemplate.queryForObject(BOOKING_UPDATE, new Object[]{
@@ -78,8 +75,8 @@ public class JdbcTemplateBooking implements IBookingRepository {
     }
 
     @Override
-    public boolean delete(Booking booking) {
-        return jdbcTemplate.update(BOOKING_DELETE_BY_ID, booking.getId()) > 0;
+    public void delete(Booking booking) {
+        jdbcTemplate.update(BOOKING_DELETE_BY_ID, booking.getId());
     }
 
     @Override
@@ -96,7 +93,7 @@ public class JdbcTemplateBooking implements IBookingRepository {
                 if (!bookingMap.keySet().contains(resultSet.getLong("id"))) {
                     Booking booking = new Booking();
                     booking.setId(resultSet.getLong("id"));
-                    booking.setTrip(tripRepository.findById(resultSet.getLong("trip")));
+                    booking.setTrip(tripRepository.getOne(resultSet.getLong("trip")));
                     booking.setCustomer(resultSet.getString("customer"));
                     booking.setPhoneNumber(resultSet.getString("phone_number"));
                     booking.setTickets(resultSet.getInt("tickets"));

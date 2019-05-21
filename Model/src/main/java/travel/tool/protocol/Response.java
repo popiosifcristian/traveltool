@@ -13,6 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Response implements Serializable {
+    private static final long serialVersionUID = 9185433167586745934L;
     private Object data;
     private Type type;
 }

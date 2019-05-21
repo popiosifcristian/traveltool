@@ -13,32 +13,27 @@ import java.util.List;
  * @author ipop
  */
 @Service
-public class BookingService implements IBookingRepository {
+public class BookingService {
     @Autowired
     @Qualifier("jdbcTemplateBooking")
     private IBookingRepository bookingRepository;
 
-    @Override
-    public List<Booking> getAll() {
-        return new ArrayList<>(bookingRepository.getAll());
+    public List<Booking> findAll() {
+        return new ArrayList<>(bookingRepository.findAll());
     }
 
-    @Override
-    public Booking findById(long id) {
-        return bookingRepository.findById(id);
+    public Booking getOne(long id) {
+        return bookingRepository.getOne(id);
     }
 
-    @Override
-    public Booking update(Booking booking) {
-        return bookingRepository.update(booking);
+    public Booking save(Booking booking) {
+        return bookingRepository.save(booking);
     }
 
-    @Override
-    public boolean delete(Booking booking) {
-        return bookingRepository.delete(booking);
+    public void delete(Booking booking) {
+        bookingRepository.delete(booking);
     }
 
-    @Override
     public int getTicketsById(long id) {
         return bookingRepository.getTicketsById(id);
     }

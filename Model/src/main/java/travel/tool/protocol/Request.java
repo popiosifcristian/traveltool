@@ -13,6 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Request implements Serializable {
+    private static final long serialVersionUID = -2011766021764815724L;
     private Object data;
     private Type type;
 

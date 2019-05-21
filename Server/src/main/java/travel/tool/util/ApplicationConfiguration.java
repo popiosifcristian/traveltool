@@ -3,6 +3,7 @@ package travel.tool.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Lazy;
@@ -10,9 +11,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
-import travel.tool.TravelToolServerImpl;
-import travel.tool.repository.*;
-import travel.tool.repository.dao.*;
+import travel.tool.controller.TravelToolServerImpl;
 
 import javax.sql.DataSource;
 import java.util.ResourceBundle;
@@ -46,44 +45,14 @@ public class ApplicationConfiguration {
                 .append(":")
                 .append("5432")
                 .append("/")
-                .append(dataSourceDatabase)
-                .append("?user=")
-                .append(dataSourceUsername)
-                .append("&password=")
-                .append(dataSourcePassword).toString();
+                .append(dataSourceDatabase).toString();
+//                .append("?user=")
+//                .append(dataSourceUsername)
+//                .append("&password=")
+//                .append(dataSourcePassword).toString();
 
-        return new SingleConnectionDataSource(url, false);
+        return DataSourceBuilder.create().username("postgres").password("postgres").url(url).build();
     }
-
-//    @Bean
-//    public ICustomerRepository customerRepository() {
-//        return new JdbcTemplateCustomer(dataSource());
-//    }
-//
-//    @Bean
-//    public ICompanyRepository companyRepository() {
-//        return new JdbcTemplateCompany(dataSource());
-//    }
-//
-//    @Bean
-//    public IEmployeeRepository employeeRepository() {
-//        return new JdbcTemplateEmployee(dataSource());
-//    }
-//
-//    @Bean
-//    public ILandmarkRepository landmarkRepository() {
-//        return new JdbcTemplateLandmark(dataSource());
-//    }
-//
-//    @Bean
-//    public ITripRepository tripRepository() {
-//        return new JdbcTemplateTrip(dataSource());
-//    }
-//
-//    @Bean
-//    public IBookingRepository bookingRepository() {
-//        return new JdbcTemplateBooking(dataSource());
-//    }
 
     @Bean
     public ResourceBundle resourceBundle() {

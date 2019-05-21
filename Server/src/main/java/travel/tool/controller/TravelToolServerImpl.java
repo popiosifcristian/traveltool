@@ -1,15 +1,12 @@
-package travel.tool;
+package travel.tool.controller;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
 import travel.tool.model.*;
 import travel.tool.protocol.Request;
 import travel.tool.protocol.Response;
 import travel.tool.service.*;
-import travel.tool.util.ApplicationConfiguration;
 import util.IServerProtocol;
 
 import java.io.IOException;
@@ -104,122 +101,128 @@ public class TravelToolServerImpl implements IServerProtocol, Runnable {
 
     @Override
     public Response getAllBooking(Request request) {
-        return createResponse(bookingService.getAll(), request);
+        return createResponse(bookingService.findAll(), request);
     }
 
     @Override
     public Response findBookingById(Request request) {
-        return createResponse(bookingService.findById((Long) request.getData()), request);
+        return createResponse(bookingService.getOne((Long) request.getData()), request);
     }
 
     @Override
     public Response updateBooking(Request request) {
-        return createResponse(bookingService.update((Booking) request.getData()), request);
+        return createResponse(bookingService.save((Booking) request.getData()), request);
     }
 
     @Override
     public Response deleteBooking(Request request) {
-        return createResponse(bookingService.delete((Booking) request.getData()), request);
+        bookingService.delete((Booking) request.getData());
+        return createResponse(true, request);
     }
 
     @Override
     public Response getAllCompany(Request request) {
-        return createResponse(companyService.getAll(), request);
+        return createResponse(companyService.findAll(), request);
     }
 
     @Override
     public Response findCompanyById(Request request) {
-        return createResponse(companyService.findById((Long) request.getData()), request);
+        return createResponse(companyService.getOne((Long) request.getData()), request);
     }
 
     @Override
     public Response updateCompany(Request request) {
-        return createResponse(companyService.update((Company) request.getData()), request);
+        return createResponse(companyService.save((Company) request.getData()), request);
     }
 
     @Override
     public Response deleteCompany(Request request) {
-        return createResponse(companyService.delete((Company) request.getData()), request);
+        companyService.delete((Company) request.getData());
+        return createResponse(true, request);
     }
 
     @Override
     public Response getAllCustomer(Request request) {
-        return createResponse(customerService.getAll(), request);
+        return createResponse(customerService.findAll(), request);
     }
 
     @Override
     public Response findCustomerById(Request request) {
-        return createResponse(customerService.findById((Long) request.getData()), request);
+        return createResponse(customerService.getOne((Long) request.getData()), request);
     }
 
     @Override
     public Response updateCustomer(Request request) {
-        return createResponse(customerService.update((Customer) request.getData()), request);
+        return createResponse(customerService.save((Customer) request.getData()), request);
     }
 
     @Override
     public Response deleteCustomer(Request request) {
-        return createResponse(customerService.delete((Customer) request.getData()), request);
+        customerService.delete((Customer) request.getData());
+        return createResponse(true, request);
     }
 
     @Override
     public Response getAllEmployee(Request request) {
-        return createResponse(employeeService.getAll(), request);
+        return createResponse(employeeService.findAll(), request);
     }
 
     @Override
     public Response findEmployeeById(Request request) {
-        return createResponse(employeeService.findById((Long) request.getData()), request);
+        return createResponse(employeeService.getOne((Long) request.getData()), request);
     }
 
     @Override
     public Response updateEmployee(Request request) {
-        return createResponse(employeeService.update((Employee) request.getData()), request);
+        return createResponse(employeeService.save((Employee) request.getData()), request);
     }
 
     @Override
     public Response deleteEmployee(Request request) {
-        return createResponse(employeeService.delete((Employee) request.getData()), request);
+        employeeService.delete((Employee) request.getData());
+        return createResponse(true, request);
     }
 
     @Override
     public Response getAllLandmark(Request request) {
-        return createResponse(landmarkService.getAll(), request);
+        return createResponse(landmarkService.findAll(), request);
     }
 
     @Override
     public Response findLandmarkById(Request request) {
-        return createResponse(landmarkService.findById((Long) request.getData()), request);
+        return createResponse(landmarkService.getOne((Long) request.getData()), request);
     }
 
     @Override
     public Response updateLandmark(Request request) {
-        return createResponse(landmarkService.update((Landmark) request.getData()), request);
+        return createResponse(landmarkService.save((Landmark) request.getData()), request);
     }
 
     @Override
     public Response deleteLandmark(Request request) {
-        return createResponse(landmarkService.delete((Landmark) request.getData()), request);
+        landmarkService.delete((Landmark) request.getData());
+        return createResponse(true, request);
     }
 
     @Override
     public Response getAllTrip(Request request) {
-        return createResponse(tripService.getAll(), request);
+        return createResponse(tripService.findAll(), request);
     }
 
     @Override
     public Response findTripById(Request request) {
-        return createResponse(tripService.findById((Long) request.getData()), request);
+        return createResponse(tripService.getOne((Long) request.getData()), request);
     }
 
     @Override
     public Response updateTrip(Request request) {
-        return createResponse(tripService.update((Trip) request.getData()), request);
+        return createResponse(tripService.save((Trip) request.getData()), request);
     }
 
     @Override
     public Response deleteTrip(Request request) {
-        return createResponse(tripService.delete((Trip) request.getData()), request);
+        tripService.delete((Trip) request.getData());
+        return createResponse(true, request);
     }
 
     @Override
