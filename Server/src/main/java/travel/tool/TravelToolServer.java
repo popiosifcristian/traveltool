@@ -10,8 +10,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * @author ipop
  */
-@SpringBootApplication
-@ComponentScan({"travel.tool"})
+@SpringBootApplication(scanBasePackages ="travel.tool")
 @EntityScan("travel.tool")
 @EnableJpaRepositories("travel.tool.repository.orm")
 @EnableScheduling
