@@ -25,7 +25,7 @@ public class EmployeeController implements ICrudController<Employee> {
     }
 
     @Override
-    public Employee getOne(long id) {
+    public Employee getOne(Long id) {
         return employeeService.getOne(id);
     }
 

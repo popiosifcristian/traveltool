@@ -25,7 +25,7 @@ public class CustomerController implements ICrudController<Customer> {
     }
 
     @Override
-    public Customer getOne(long id) {
+    public Customer getOne(Long id) {
         return customerService.getOne(id);
     }
 

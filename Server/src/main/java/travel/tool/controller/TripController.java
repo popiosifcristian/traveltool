@@ -27,7 +27,7 @@ public class TripController implements ICrudController<Trip> {
     }
 
     @Override
-    public Trip getOne(long id) {
+    public Trip getOne(Long id) {
         return tripService.getOne(id);
     }
 

@@ -25,7 +25,7 @@ public class CompanyController implements ICrudController<Company> {
     }
 
     @Override
-    public Company getOne(long id) {
+    public Company getOne(Long id) {
         return companyService.getOne(id);
     }
 

@@ -1,8 +1,7 @@
 package travel.tool.controller;
 
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
 
@@ -14,9 +13,9 @@ public interface ICrudController<T> {
     Collection<T> findAll();
 
     @RequestMapping(value = "/getOne", method = RequestMethod.GET)
-    T getOne(@RequestBody long id);
+    T getOne(@RequestParam Long id);
 
-    @RequestMapping(value = "/save", method = RequestMethod.POST)
+    @PostMapping(value = "/save")
     T save(@RequestBody T model);
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)

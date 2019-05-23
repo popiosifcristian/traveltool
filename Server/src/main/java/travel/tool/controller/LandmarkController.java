@@ -25,7 +25,7 @@ public class LandmarkController implements ICrudController<Landmark> {
     }
 
     @Override
-    public Landmark getOne(long id) {
+    public Landmark getOne(Long id) {
         return landmarkService.getOne(id);
     }
 

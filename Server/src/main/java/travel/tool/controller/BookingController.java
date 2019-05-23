@@ -27,7 +27,7 @@ public class BookingController implements ICrudController<Booking> {
     }
 
     @Override
-    public Booking getOne(long id) {
+    public Booking getOne(Long id) {
         return bookingService.getOne(id);
     }
 
