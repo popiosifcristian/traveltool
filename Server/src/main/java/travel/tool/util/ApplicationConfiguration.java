@@ -10,9 +10,14 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.task.SimpleAsyncTaskExecutor;
 import org.springframework.core.task.TaskExecutor;
+import org.springframework.format.datetime.standard.DateTimeFormatterRegistrar;
+import org.springframework.format.number.NumberFormatAnnotationFormatterFactory;
+import org.springframework.format.support.DefaultFormattingConversionService;
+import org.springframework.format.support.FormattingConversionService;
 import travel.tool.controller.TravelToolServerImpl;
 
 import javax.sql.DataSource;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 /**
@@ -68,5 +73,19 @@ public class ApplicationConfiguration {
         return strings -> executor.execute(server);
     }
 
+    @Bean
+    public FormattingConversionService conversionService() {
+        DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(false);
 
+        conversionService.addFormatterForFieldAnnotation(new NumberFormatAnnotationFormatterFactory());
+
+        DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
+        registrar.setDateFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        registrar.setTimeFormatter(DateTimeFormatter.ofPattern("HH:mm:ss"));
+        registrar.setDateTimeFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        registrar.registerFormatters(conversionService);
+
+        return conversionService;
+    }
 }
+

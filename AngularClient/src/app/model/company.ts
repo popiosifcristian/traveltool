@@ -1,4 +1,4 @@
-import {CompanyType} from "./company-type.enum";
+import {CompanyType} from './company-type.enum';
 
 export class Company {
   id: bigint;

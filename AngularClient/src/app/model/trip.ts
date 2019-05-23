@@ -1,12 +1,12 @@
-import {Landmark} from "./landmark";
-import {Company} from "./company";
+import {Landmark} from './landmark';
+import {Company} from './company';
 
 export class Trip {
   id: bigint;
   landmark: Landmark;
   transportCompany: Company;
-  date: LocalDate;
-  startTime: LocalTime;
+  date: string;
+  startTime: string;
   price: number;
   availablePlaces: bigint;
 }

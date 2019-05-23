@@ -28,6 +28,34 @@
                     INSERT INTO company (name, address, website, email, phone_number, description, type)
                     VALUES ('TEST TRANSPORT COMPANY 5', 'Cluj', 'www.transporttc5.com', 'ttc5@gmail.com', '0123456789', 'Test ttc 5', 'TRANSPORT');
 
+                    INSERT INTO employee (username, password, email, first_name, last_name, phone_number, company)
+                    VALUES ('employee1', 'password', 'email@email.com', 'first name', 'last name', 'phone number', 1);
+                    INSERT INTO employee (username, password, email, first_name, last_name, phone_number, company)
+                    VALUES ('employee2', 'password', 'email@email.com', 'first name', 'last name', 'phone number', 2);
+                    INSERT INTO employee (username, password, email, first_name, last_name, phone_number, company)
+                    VALUES ('employee3', 'password', 'email@email.com', 'first name', 'last name', 'phone number', 3);
+
+                    INSERT INTO landmark (name, location, description)
+                    VALUES ('landmark 1', 'location', 'description');
+                    INSERT INTO landmark (name, location, description)
+                    VALUES ('landmark 2', 'location', 'description');
+                    INSERT INTO landmark (name, location, description)
+                    VALUES ('landmark 3', 'location', 'description');
+
+                    INSERT INTO trip (landmark, company, date, start_time, price, available_places)
+                    VALUES (1, 6, '2019-10-10', '10:10:10', 10, 10);
+                    INSERT INTO trip (landmark, company, date, start_time, price, available_places)
+                    VALUES (2, 7, '2019-10-10', '10:10:10', 10, 10);
+                    INSERT INTO trip (landmark, company, date, start_time, price, available_places)
+                    VALUES (3, 8, '2019-10-10', '10:10:10', 10, 10);
+
+                    INSERT INTO booking (trip, customer, phone_number, tickets)
+                    VALUES (1, 'Test Customer 1', '0123456789', 1);
+                    INSERT INTO booking (trip, customer, phone_number, tickets)
+                    VALUES (2, 'Test Customer 2', '0123456789', 1);
+                    INSERT INTO booking (trip, customer, phone_number, tickets)
+                    VALUES (3, 'Test Customer 3', '0123456789', 1);
+
             ]]>
         </sql>
     </changeSet>

@@ -34,8 +34,6 @@ public class Trip extends AbstractEntity implements Serializable {
     private double price;
     @Column(name = "available_places")
     private int availablePlaces;
-    @Transient
-    private List<Customer> customerList;
 
     public Trip(Landmark landmark, Company transportCompany, LocalDate date, LocalTime startTime, double price,
                 int availablePlaces) {
@@ -57,6 +55,5 @@ public class Trip extends AbstractEntity implements Serializable {
         this.startTime = startTime;
         this.price = price;
         this.availablePlaces = availablePlaces;
-        this.customerList = customerList;
     }
 }

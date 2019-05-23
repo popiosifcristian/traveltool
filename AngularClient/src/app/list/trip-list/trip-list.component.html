@@ -1,0 +1,28 @@
+<div class="card my-5">
+  <div class="card-body">
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Landmark</th>
+        <th scope="col">Transport Company</th>
+        <th scope="col">Date</th>
+        <th scope="col">Start time</th>
+        <th scope="col">Price</th>
+        <th scope="col">Available Places</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let trip of trips">
+        <td>{{ trip.id }}</td>
+        <td>{{ trip.landmark.name}}</td>
+        <td>{{ trip.transportCompany.name }}</td>
+        <td>{{ trip.date }}</td>
+        <td>{{ trip.startTime }}</td>
+        <td>{{ trip.price }}</td>
+        <td>{{ trip.availablePlaces }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
