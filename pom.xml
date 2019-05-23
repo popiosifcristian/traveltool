@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>travel.tool</groupId>
-    <artifactId>TravelTool</artifactId>
+    <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>TravelTool</name>
     <description>Travel Tool Project</description>
@@ -17,9 +17,9 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>Model</module>
         <module>Client</module>
         <module>Server</module>
-        <module>Model</module>
     </modules>
 
     <build>

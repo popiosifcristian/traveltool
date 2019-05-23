@@ -13,7 +13,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication(scanBasePackages ="travel.tool")
 @EntityScan("travel.tool")
 @EnableJpaRepositories("travel.tool.repository.orm")
-@EnableScheduling
+//@EnableScheduling
 public class TravelToolServer {
     public static void main(String[] args) {
         SpringApplication.run(TravelToolServer.class, args);
