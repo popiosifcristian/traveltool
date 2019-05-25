@@ -8,7 +8,7 @@ import travel.tool.model.Landmark;
  * @author ipop
  */
 @Service
-public class LandmarkEpoMapper extends GenericMapper<Landmark, LandmarkEpo>{
+public class LandmarkMapper extends GenericMapper<Landmark, LandmarkEpo>{
     @Override
     public Landmark toInternal(LandmarkEpo epo) {
         return new Landmark(epo.getId(),epo.getName(),epo.getLocation(),epo.getDescription());

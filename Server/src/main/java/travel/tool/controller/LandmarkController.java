@@ -3,8 +3,7 @@ package travel.tool.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import travel.tool.epo.LandmarkEpo;
-import travel.tool.mapper.LandmarkEpoMapper;
-import travel.tool.model.Landmark;
+import travel.tool.mapper.LandmarkMapper;
 import travel.tool.service.LandmarkService;
 
 import java.util.Collection;
@@ -17,27 +16,27 @@ import java.util.Collection;
 @RequestMapping(value = "/landmark")
 public class LandmarkController {
     @Autowired
-    private LandmarkEpoMapper landmarkEpoMapper;
+    private LandmarkMapper landmarkMapper;
     @Autowired
     private LandmarkService landmarkService;
 
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Collection<LandmarkEpo> findAll() {
-        return landmarkEpoMapper.toExternals(landmarkService.findAll());
+        return landmarkMapper.toExternal(landmarkService.findAll());
     }
 
     @RequestMapping(value = "/getOne", method = RequestMethod.GET)
     public LandmarkEpo getOne(@RequestParam Long id) {
-        return landmarkEpoMapper.toExternal(landmarkService.getOne(id));
+        return landmarkMapper.toExternal(landmarkService.getOne(id));
     }
 
     @PostMapping(value = "/save")
     public LandmarkEpo save(@RequestBody LandmarkEpo model) {
-        return landmarkEpoMapper.toExternal(landmarkService.save(landmarkEpoMapper.toInternal(model)));
+        return landmarkMapper.toExternal(landmarkService.save(landmarkMapper.toInternal(model)));
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
     public void delete(@RequestBody LandmarkEpo model) {
-        landmarkService.delete(landmarkEpoMapper.toInternal(model));
+        landmarkService.delete(landmarkMapper.toInternal(model));
     }
 }

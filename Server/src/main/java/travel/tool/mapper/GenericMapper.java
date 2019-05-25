@@ -13,13 +13,13 @@ public abstract class GenericMapper<M, E> {
 
     public abstract E toExternal(M model);
 
-    public List<M> toInternals(Collection<E> epoList) {
+    public List<M> toInternal(Collection<E> epoList) {
         return epoList.stream()
                 .map(this::toInternal)
                 .collect(Collectors.toList());
     }
 
-    public List<E> toExternals(Collection<M> modelList) {
+    public List<E> toExternal(Collection<M> modelList) {
         return modelList.stream()
                 .map(this::toExternal)
                 .collect(Collectors.toList());

@@ -2,6 +2,8 @@ package travel.tool.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import travel.tool.epo.CustomerEpo;
+import travel.tool.mapper.CustomerMapper;
 import travel.tool.model.Customer;
 import travel.tool.service.CustomerService;
 
@@ -16,24 +18,26 @@ import java.util.Collection;
 public class CustomerController {
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private CustomerMapper customerMapper;
 
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
-    public Collection<Customer> findAll() {
-        return customerService.findAll();
+    public Collection<CustomerEpo> findAll() {
+        return customerMapper.toExternal(customerService.findAll());
     }
 
     @RequestMapping(value = "/getOne", method = RequestMethod.GET)
-    public Customer getOne(@RequestParam Long id) {
-        return customerService.getOne(id);
+    public CustomerEpo getOne(@RequestParam Long id) {
+        return customerMapper.toExternal(customerService.getOne(id));
     }
 
     @PostMapping(value = "/save")
-    public Customer save(@RequestBody Customer model) {
-        return customerService.save(model);
+    public CustomerEpo save(@RequestBody CustomerEpo model) {
+        return customerMapper.toExternal(customerService.save(customerMapper.toInternal(model)));
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public void delete(@RequestBody Customer model) {
-        customerService.delete(model);
+    public void delete(@RequestBody CustomerEpo model) {
+        customerService.delete(customerMapper.toInternal(model));
     }
 }
