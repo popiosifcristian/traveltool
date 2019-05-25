@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public class LandmarkEpo {
-    private long id;
+    private Long id;
     private String name;
     private String location;
     private String description;

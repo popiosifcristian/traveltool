@@ -40,20 +40,20 @@ public class ApplicationConfiguration {
         return ResourceBundle.getBundle("Bundle");
     }
 
-    @Bean
-    public IServerProtocol getServer() {
-        return new TravelToolServerImpl();
-    }
-
-    @Bean
-    public TaskExecutor taskExecutor() {
-        return new SimpleAsyncTaskExecutor();
-    }
-
-    @Bean
-    public CommandLineRunner schedulingRunner(TaskExecutor executor) {
-        return strings -> executor.execute(getServer());
-    }
+//    @Bean
+//    public IServerProtocol getServer() {
+//        return new TravelToolServerImpl();
+//    }
+//
+//    @Bean
+//    public TaskExecutor taskExecutor() {
+//        return new SimpleAsyncTaskExecutor();
+//    }
+//
+//    @Bean
+//    public CommandLineRunner schedulingRunner(TaskExecutor executor) {
+//        return strings -> executor.execute(getServer());
+//    }
 
     @Bean
     public FormattingConversionService conversionService() {

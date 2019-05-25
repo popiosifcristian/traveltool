@@ -7,6 +7,14 @@
     <changeSet id="01" author="ipop">
         <sql>
             <![CDATA[
+
+                    DELETE FROM booking;
+                    DELETE FROM trip;
+                    DELETE FROM landmark;
+                    DELETE FROM employee;
+                    DELETE FROM customer;
+                    DELETE FROM company;
+
                     INSERT INTO company (name, address, website, email, phone_number, description, type)
                     VALUES ('TEST TRAVEL AGENCY 1', 'Cluj', 'www.travelag1.com', 'tag1@gmail.com', '0123456789', 'Test tag 1', 'AGENCY');
                     INSERT INTO company (name, address, website, email, phone_number, description, type)
@@ -55,6 +63,7 @@
                     VALUES (2, 'Test Customer 2', '0123456789', 1);
                     INSERT INTO booking (trip, customer, phone_number, tickets)
                     VALUES (3, 'Test Customer 3', '0123456789', 1);
+
 
             ]]>
         </sql>
