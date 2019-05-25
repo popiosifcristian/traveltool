@@ -1,9 +1,7 @@
 package travel.tool.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import travel.tool.epo.LandmarkEpo;
 import travel.tool.mapper.LandmarkEpoMapper;
 import travel.tool.model.Landmark;
@@ -15,31 +13,31 @@ import java.util.Collection;
  * @author ipop
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:2121/landmark")
+@CrossOrigin()
 @RequestMapping(value = "/landmark")
-public class LandmarkController implements ICrudController<LandmarkEpo> {
+public class LandmarkController {
     @Autowired
     private LandmarkEpoMapper landmarkEpoMapper;
     @Autowired
     private LandmarkService landmarkService;
 
-    @Override
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Collection<LandmarkEpo> findAll() {
         return landmarkEpoMapper.toExternals(landmarkService.findAll());
     }
 
-    @Override
-    public LandmarkEpo getOne(Long id) {
+    @RequestMapping(value = "/getOne", method = RequestMethod.GET)
+    public LandmarkEpo getOne(@RequestParam Long id) {
         return landmarkEpoMapper.toExternal(landmarkService.getOne(id));
     }
 
-    @Override
-    public LandmarkEpo save(LandmarkEpo model) {
+    @PostMapping(value = "/save")
+    public LandmarkEpo save(@RequestBody LandmarkEpo model) {
         return landmarkEpoMapper.toExternal(landmarkService.save(landmarkEpoMapper.toInternal(model)));
     }
 
-    @Override
-    public void delete(LandmarkEpo model) {
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void delete(@RequestBody LandmarkEpo model) {
         landmarkService.delete(landmarkEpoMapper.toInternal(model));
     }
 }

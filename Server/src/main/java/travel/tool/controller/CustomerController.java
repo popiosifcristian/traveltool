@@ -1,9 +1,7 @@
 package travel.tool.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import travel.tool.model.Customer;
 import travel.tool.service.CustomerService;
 
@@ -13,29 +11,29 @@ import java.util.Collection;
  * @author ipop
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:2121/customer")
+@CrossOrigin()
 @RequestMapping(value = "/customer")
-public class CustomerController implements ICrudController<Customer> {
+public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @Override
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Collection<Customer> findAll() {
         return customerService.findAll();
     }
 
-    @Override
-    public Customer getOne(Long id) {
+    @RequestMapping(value = "/getOne", method = RequestMethod.GET)
+    public Customer getOne(@RequestParam Long id) {
         return customerService.getOne(id);
     }
 
-    @Override
-    public Customer save(Customer model) {
+    @PostMapping(value = "/save")
+    public Customer save(@RequestBody Customer model) {
         return customerService.save(model);
     }
 
-    @Override
-    public void delete(Customer model) {
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void delete(@RequestBody Customer model) {
         customerService.delete(model);
     }
 }

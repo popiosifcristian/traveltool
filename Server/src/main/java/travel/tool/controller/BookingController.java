@@ -2,9 +2,7 @@ package travel.tool.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import travel.tool.model.Booking;
 import travel.tool.service.BookingService_;
 
@@ -14,30 +12,30 @@ import java.util.Collection;
  * @author ipop
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:2121/booking")
+@CrossOrigin()
 @RequestMapping(value = "/booking")
-public class BookingController implements ICrudController<Booking> {
+public class BookingController {
     @Autowired
     @Qualifier("bookingService_")
     private BookingService_ bookingService;
 
-    @Override
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Collection<Booking> findAll() {
         return bookingService.findAll();
     }
 
-    @Override
-    public Booking getOne(Long id) {
+    @RequestMapping(value = "/getOne", method = RequestMethod.GET)
+    public Booking getOne(@RequestParam Long id) {
         return bookingService.getOne(id);
     }
 
-    @Override
-    public Booking save(Booking model) {
+    @PostMapping(value = "/save", consumes = "application/json")
+    public Booking save(@RequestBody Booking model) {
         return bookingService.save(model);
     }
 
-    @Override
-    public void delete(Booking model) {
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void delete(@RequestBody Booking model) {
         bookingService.delete(model);
     }
 }

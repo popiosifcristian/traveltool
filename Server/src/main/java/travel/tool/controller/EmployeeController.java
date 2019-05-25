@@ -1,9 +1,7 @@
 package travel.tool.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import travel.tool.model.Employee;
 import travel.tool.service.EmployeeService;
 
@@ -13,29 +11,29 @@ import java.util.Collection;
  * @author ipop
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:2121/employee")
+@CrossOrigin()
 @RequestMapping(value = "/employee")
-public class EmployeeController implements ICrudController<Employee> {
+public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
-    @Override
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Collection<Employee> findAll() {
         return employeeService.findAll();
     }
 
-    @Override
-    public Employee getOne(Long id) {
+    @RequestMapping(value = "/getOne", method = RequestMethod.GET)
+    public Employee getOne(@RequestParam Long id) {
         return employeeService.getOne(id);
     }
 
-    @Override
-    public Employee save(Employee model) {
+    @PostMapping(value = "/save")
+    public Employee save(@RequestBody Employee model) {
         return employeeService.save(model);
     }
 
-    @Override
-    public void delete(Employee model) {
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void delete(@RequestBody Employee model) {
         employeeService.delete(model);
     }
 }

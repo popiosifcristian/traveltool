@@ -2,9 +2,7 @@ package travel.tool.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import travel.tool.model.Trip;
 import travel.tool.service.TripService_;
 
@@ -14,30 +12,30 @@ import java.util.Collection;
  * @author ipop
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:2121/trip")
+@CrossOrigin()
 @RequestMapping(value = "/trip")
-public class TripController implements ICrudController<Trip> {
+public class TripController {
     @Autowired
     @Qualifier("tripService_")
     private TripService_ tripService;
 
-    @Override
+    @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     public Collection<Trip> findAll() {
         return tripService.findAll();
     }
 
-    @Override
-    public Trip getOne(Long id) {
+    @RequestMapping(value = "/getOne", method = RequestMethod.GET)
+    public Trip getOne(@RequestParam Long id) {
         return tripService.getOne(id);
     }
 
-    @Override
-    public Trip save(Trip model) {
+    @PostMapping(value = "/save")
+    public Trip save(@RequestBody Trip model) {
         return tripService.save(model);
     }
 
-    @Override
-    public void delete(Trip model) {
+    @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
+    public void delete(@RequestBody Trip model) {
         tripService.delete(model);
     }
 }

@@ -23,7 +23,6 @@ import java.util.ResourceBundle;
 /**
  * @author ipop
  */
-//@Component
 public class TravelToolServerImpl implements IServerProtocol, Runnable {
     private static final Logger LOGGER = Logger.getLogger(TravelToolServerImpl.class);
     @Autowired
