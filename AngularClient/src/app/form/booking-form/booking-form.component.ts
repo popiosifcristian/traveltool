@@ -1,9 +1,10 @@
-import { TripService } from './../../service/trip.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Booking } from 'src/app/model/booking';
-import { BookingService } from 'src/app/service/booking.service';
-import { Trip } from 'src/app/model/trip';
+import {TripService} from './../../service/trip.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Booking} from 'src/app/model/booking';
+import {BookingService} from 'src/app/service/booking.service';
+import {Trip} from 'src/app/model/trip';
+import {trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-booking-form',
@@ -13,18 +14,21 @@ import { Trip } from 'src/app/model/trip';
 export class BookingFormComponent implements OnInit {
   booking: Booking;
   tripId: bigint;
+  trip: Trip;
+
   constructor(private route: ActivatedRoute, private router: Router, private bookingService: BookingService,
               private tripService: TripService) {
     this.booking = new Booking();
-   }
+  }
 
-   ngOnInit() {}
+  ngOnInit() {
+  }
 
-  onSubmit() {
+  async onSubmit() {
     this.booking.id = 0;
-    this.tripService.getOne(this.tripId).subscribe(data => this.booking.trip = data);
-    console.log(this.booking);
-    this.bookingService.save(this.booking).subscribe(result => this.goToBookingList());
+    this.trip = await this.tripService.getOne(this.tripId).toPromise();
+    this.booking.trip = this.trip;
+    this.bookingService.save(this.booking).subscribe(() => this.goToBookingList());
   }
 
   goToBookingList() {
