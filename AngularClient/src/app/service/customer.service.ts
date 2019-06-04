@@ -12,18 +12,18 @@ export class CustomerService {
   }
 
   public findAll(): Observable<Customer[]> {
-    return this.http.get<Customer[]>(this.url);
+    return this.http.get<Customer[]>(this.url + '/findAll');
   }
 
   public save(customer: Customer) {
-    return this.http.post<Customer>(this.url, customer);
+    return this.http.post<Customer>(this.url + '/save', customer);
   }
 
   public getOne(id: bigint): Observable<Customer> {
-    return this.http.get<Customer>(this.url + '?id=' + id);
+    return this.http.get<Customer>(this.url + '/getOne' + '?id=' + id);
   }
 
   public delete(customer: Customer) {
-    return this.http.post<Customer>(this.url, customer);
+    return this.http.post<Customer>(this.url + '/delete', customer);
   }
 }

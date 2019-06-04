@@ -13,18 +13,18 @@ export class CompanyService {
   }
 
   public findAll(): Observable<Company[]> {
-    return this.http.get<Company[]>(this.url);
+    return this.http.get<Company[]>(this.url + '/findAll');
   }
 
   public save(company: Company) {
-    return this.http.post<Company>(this.url, company);
+    return this.http.post<Company>(this.url + '/save', company);
   }
 
   public getOne(id: bigint): Observable<Company> {
-    return this.http.get<Company>(this.url + '?id=' + id);
+    return this.http.get<Company>(this.url + '/getOne' + '?id=' + id);
   }
 
   public delete(company: Company) {
-    return this.http.post<Company>(this.url, company);
+    return this.http.post<Company>(this.url + '/delete', company);
   }
 }

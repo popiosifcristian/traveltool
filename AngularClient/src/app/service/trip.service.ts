@@ -13,18 +13,18 @@ export class TripService {
   }
 
   public findAll(): Observable<Trip[]> {
-    return this.http.get<Trip[]>(this.url);
+    return this.http.get<Trip[]>(this.url + '/findAll');
   }
 
   public save(trip: Trip) {
-    return this.http.post<Trip>(this.url, trip);
+    return this.http.post<Trip>(this.url + '/save', trip);
   }
 
   public getOne(id: bigint): Observable<Trip> {
-    return this.http.get<Trip>(this.url + '?id=' + id);
+    return this.http.get<Trip>(this.url + '/getOne' + '?id=' + id);
   }
 
   public delete(trip: Trip) {
-    return this.http.post<Trip>(this.url, trip);
+    return this.http.post<Trip>(this.url + '/delete', trip);
   }
 }

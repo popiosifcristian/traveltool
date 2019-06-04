@@ -1,0 +1,17 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <div class="form-group">
+        <label for="triId">Trip Id</label>
+        <input type="number" [(ngModel)]="triId" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="customer">Customer</label>
+        <input type="text" [(ngModel)]="booking.customer" class="form-control" placeholder="Enter customer">
+        <input type="text" [(ngModel)]="booking.phoneNumber" class="form-control" placeholder="Enter customer phone number">
+        <input type="text" [(ngModel)]="booking.tickets" class="form-control" placeholder="Enter tickets number">
+      </div>
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>

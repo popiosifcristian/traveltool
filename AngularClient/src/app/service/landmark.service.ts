@@ -13,18 +13,18 @@ export class LandmarkService {
   }
 
   public findAll(): Observable<Landmark[]> {
-    return this.http.get<Landmark[]>(this.url);
+    return this.http.get<Landmark[]>(this.url + '/findAll');
   }
 
   public save(landmark: Landmark) {
-    return this.http.post<Landmark>(this.url, landmark);
+    return this.http.post<Landmark>(this.url + '/save', landmark);
   }
 
   public getOne(id: bigint): Observable<Landmark> {
-    return this.http.get<Landmark>(this.url + '?id=' + id);
+    return this.http.get<Landmark>(this.url + '/getOne' + '?id=' + id);
   }
 
   public delete(landmark: Landmark) {
-    return this.http.post<Landmark>(this.url, landmark);
+    return this.http.post<Landmark>(this.url + '/delete', landmark);
   }
 }

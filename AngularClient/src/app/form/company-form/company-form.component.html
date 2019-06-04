@@ -1,0 +1,15 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <div class="form-group">
+        <input type="text" [(ngModel)]="model.name" class="form-control" placeholder="Enter name">
+        <input type="text" [(ngModel)]="model.address" class="form-control" placeholder="Enter address">
+        <input type="text" [(ngModel)]="model.email" class="form-control" placeholder="Enter email">
+        <input type="text" [(ngModel)]="model.phoneNumber" class="form-control" placeholder="Enter customer phone number">
+        <input type="text" [(ngModel)]="model.description" class="form-control" placeholder="Enter description">
+        <input type="text" [(ngModel)]="model.companyType" class="form-control" placeholder="Enter companyType">
+      </div>
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>

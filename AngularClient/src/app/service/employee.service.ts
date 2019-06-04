@@ -13,18 +13,18 @@ export class EmployeeService {
   }
 
   public findAll(): Observable<Employee[]> {
-    return this.http.get<Employee[]>(this.url);
+    return this.http.get<Employee[]>(this.url + '/findAll');
   }
 
   public save(employee: Employee) {
-    return this.http.post<Employee>(this.url, employee);
+    return this.http.post<Employee>(this.url + '/save', employee);
   }
 
   public getOne(id: bigint): Observable<Employee> {
-    return this.http.get<Employee>(this.url + '?id=' + id);
+    return this.http.get<Employee>(this.url + '/getOne' + '?id=' + id);
   }
 
   public delete(employee: Employee) {
-    return this.http.post<Employee>(this.url, employee);
+    return this.http.post<Employee>(this.url + '/delete', employee);
   }
 }
