@@ -36,7 +36,7 @@ public class CompanyController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public void delete(@RequestBody CompanyEpo model) {
-        companyService.delete(companyMapper.toInternal(model));
+    public void delete(@RequestParam Long id) {
+        companyService.delete(companyService.getOne(id));
     }
 }

@@ -18,7 +18,7 @@
         <td>{{ customer.lastName }}</td>
         <td>{{ customer.email }}</td>
         <td>{{ customer.phoneNumber }}</td>
-        <button id="remove" (click)="deleteModel(customer)">Delete</button>
+        <button (click)="deleteModel(customer)" name="delete">Delete</button>
       </tr>
       </tbody>
     </table>

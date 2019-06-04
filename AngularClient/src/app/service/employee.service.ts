@@ -25,6 +25,6 @@ export class EmployeeService {
   }
 
   public delete(employee: Employee) {
-    return this.http.post<Employee>(this.url + '/delete', employee);
+    return this.http.delete<Employee>(this.url + '/delete' + '?id=' + employee.id);
   }
 }

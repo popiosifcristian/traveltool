@@ -25,6 +25,6 @@ export class TripService {
   }
 
   public delete(trip: Trip) {
-    return this.http.post<Trip>(this.url + '/delete', trip);
+    return this.http.delete<Trip>(this.url + '/delete' + '?id=' + trip.id);
   }
 }

@@ -25,6 +25,6 @@ export class CompanyService {
   }
 
   public delete(company: Company) {
-    return this.http.post<Company>(this.url + '/delete', company);
+    return this.http.delete<Company>(this.url + '/delete' + '?id=' + company.id);
   }
 }

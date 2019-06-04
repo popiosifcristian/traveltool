@@ -37,7 +37,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public void delete(@RequestBody CustomerEpo model) {
-        customerService.delete(customerMapper.toInternal(model));
+    public void delete(@RequestParam Long id) {
+        customerService.delete(customerService.getOne(id));
     }
 }

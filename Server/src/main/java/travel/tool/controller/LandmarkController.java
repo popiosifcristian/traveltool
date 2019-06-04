@@ -36,7 +36,7 @@ public class LandmarkController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public void delete(@RequestBody LandmarkEpo model) {
-        landmarkService.delete(landmarkMapper.toInternal(model));
+    public void delete(@RequestParam Long id) {
+        landmarkService.delete(landmarkService.getOne(id));
     }
 }

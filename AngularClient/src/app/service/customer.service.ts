@@ -5,7 +5,7 @@ import {Customer} from '../model/customer';
 
 @Injectable()
 export class CustomerService {
-  private url: string;
+  private readonly url: string;
 
   constructor(private http: HttpClient) {
     this.url = 'http://localhost:1212/customer';
@@ -24,6 +24,6 @@ export class CustomerService {
   }
 
   public delete(customer: Customer) {
-    return this.http.post<Customer>(this.url + '/delete', customer);
+    return this.http.delete(this.url + '/delete' + '?id=' + customer.id);
   }
 }

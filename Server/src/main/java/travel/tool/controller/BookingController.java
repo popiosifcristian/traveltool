@@ -39,7 +39,7 @@ public class BookingController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public void delete(@RequestBody BookingEpo model) {
-        bookingService.delete(bookingMapper.toInternal(model));
+    public void delete(@RequestParam Long id) {
+        bookingService.delete(bookingService.getOne(id));
     }
 }

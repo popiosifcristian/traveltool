@@ -40,7 +40,7 @@ public class TripController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public void delete(@RequestBody TripEpo model) {
-        tripService.delete(tripMapper.toInternal(model));
+    public void delete(@RequestParam Long id) {
+        tripService.delete(tripService.getOne(id));
     }
 }

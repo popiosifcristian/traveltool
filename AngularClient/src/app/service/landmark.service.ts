@@ -25,6 +25,6 @@ export class LandmarkService {
   }
 
   public delete(landmark: Landmark) {
-    return this.http.post<Landmark>(this.url + '/delete', landmark);
+    return this.http.delete<Landmark>(this.url + '/delete' + '?id=' + landmark.id);
   }
 }

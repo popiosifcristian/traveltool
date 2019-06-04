@@ -38,7 +38,7 @@ public class EmployeeController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)
-    public void delete(@RequestBody EmployeeEpo model) {
-        employeeService.delete(employeeMapper.toInternal(model));
+    public void delete(@RequestParam Long id) {
+        employeeService.delete(employeeService.getOne(id));
     }
 }
