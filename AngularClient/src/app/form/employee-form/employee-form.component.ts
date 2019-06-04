@@ -1,7 +1,8 @@
-import { Employee } from './../../model/employee';
-import { EmployeeService } from './../../service/employee.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Employee} from '../../model/employee';
+import {EmployeeService} from '../../service/employee.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CompanyService} from '../../service/company.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -10,14 +11,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class EmployeeFormComponent implements OnInit {
   model: Employee;
-  constructor(private route: ActivatedRoute, private router: Router, private service: EmployeeService) {
-    this.model = new Employee();
-   }
+  agency: bigint;
 
-   ngOnInit() {}
+  constructor(private route: ActivatedRoute, private router: Router, private service: EmployeeService,
+              private companyService: CompanyService) {
+    this.model = new Employee();
+  }
+
+  ngOnInit() {
+  }
 
   onSubmit() {
-    this.service.save(this.model).subscribe(result => this.goToModelList());
+    this.model.id = 0;
+    this.companyService.getOne(this.agency).subscribe(data => this.model.agency = data);
+    console.log(this.model);
+    this.service.save(this.model).subscribe(() => this.goToModelList());
   }
 
   goToModelList() {

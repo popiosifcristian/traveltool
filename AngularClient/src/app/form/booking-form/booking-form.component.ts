@@ -21,9 +21,9 @@ export class BookingFormComponent implements OnInit {
    ngOnInit() {}
 
   onSubmit() {
-    this.tripService.getOne(this.tripId).subscribe(data => {
-      this.booking.trip = data;
-    });
+    this.booking.id = 0;
+    this.tripService.getOne(this.tripId).subscribe(data => this.booking.trip = data);
+    console.log(this.booking);
     this.bookingService.save(this.booking).subscribe(result => this.goToBookingList());
   }
 

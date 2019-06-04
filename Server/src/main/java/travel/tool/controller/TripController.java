@@ -35,7 +35,8 @@ public class TripController {
 
     @PostMapping(value = "/save")
     public TripEpo save(@RequestBody TripEpo model) {
-        return tripMapper.toExternal(tripService.save(tripMapper.toInternal(model)));
+        tripService.save(tripMapper.toInternal(model));
+        return model;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)

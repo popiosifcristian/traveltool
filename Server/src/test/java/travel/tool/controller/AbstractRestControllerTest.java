@@ -3,6 +3,7 @@ package travel.tool.controller;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -15,6 +16,7 @@ import static org.hamcrest.core.IsEqual.equalTo;
 /**
  * @author ipop
  */
+@Ignore
 public abstract class AbstractRestControllerTest<T> {
     protected long actualId = 11111;
     protected String endpointName;

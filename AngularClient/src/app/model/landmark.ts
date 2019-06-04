@@ -1,5 +1,5 @@
 export class Landmark {
-  id: bigint;
+  id: number;
   name: string;
   location: string;
   description: string;

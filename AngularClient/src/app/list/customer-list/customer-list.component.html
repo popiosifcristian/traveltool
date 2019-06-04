@@ -8,6 +8,7 @@
         <th scope="col">Last Name</th>
         <th scope="col">Email</th>
         <th scope="col">Phone Number</th>
+        <th scope="col">Delete</th>
       </tr>
       </thead>
       <tbody>
@@ -17,6 +18,7 @@
         <td>{{ customer.lastName }}</td>
         <td>{{ customer.email }}</td>
         <td>{{ customer.phoneNumber }}</td>
+        <button id="remove" (click)="deleteModel(customer)">Delete</button>
       </tr>
       </tbody>
     </table>

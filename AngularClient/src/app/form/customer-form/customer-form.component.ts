@@ -1,7 +1,7 @@
-import { Customer } from './../../model/customer';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerService } from './../../service/customer.service';
+import {Customer} from './../../model/customer';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CustomerService} from './../../service/customer.service';
 
 @Component({
   selector: 'app-customer-form',
@@ -10,14 +10,16 @@ import { CustomerService } from './../../service/customer.service';
 })
 export class CustomerFormComponent implements OnInit {
   model: Customer = new Customer();
-  constructor(private route: ActivatedRoute, private router: Router, private service: CustomerService) {
-   }
 
-   ngOnInit() {}
+  constructor(private route: ActivatedRoute, private router: Router, private service: CustomerService) {
+  }
+
+  ngOnInit() {
+  }
 
   onSubmit() {
-    console.log(this.model);
-    this.service.save(this.model).subscribe(result => this.goToModelList());
+    this.model.id = 0;
+    this.service.save(this.model).subscribe(() => this.goToModelList());
   }
 
   goToModelList() {

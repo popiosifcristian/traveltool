@@ -1,7 +1,7 @@
 import {Trip} from './trip';
 
 export class Booking {
-  id: bigint;
+  id: number;
   trip: Trip;
   customer: string;
   phoneNumber: string;

@@ -32,9 +32,10 @@ public class BookingController {
         return bookingMapper.toExternal(bookingService.getOne(id));
     }
 
-    @PostMapping(value = "/save", consumes = "application/json")
+    @PostMapping(value = "/save")
     public BookingEpo save(@RequestBody BookingEpo model) {
-        return bookingMapper.toExternal(bookingService.save(bookingMapper.toInternal(model)));
+        bookingService.save(bookingMapper.toInternal(model));
+        return model;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)

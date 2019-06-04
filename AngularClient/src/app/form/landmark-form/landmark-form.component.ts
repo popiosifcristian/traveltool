@@ -18,6 +18,7 @@ export class LandmarkFormComponent implements OnInit {
    ngOnInit() {}
 
   onSubmit() {
+    this.model.id = 0;
     this.service.save(this.model).subscribe(result => this.goToModelList());
   }
 

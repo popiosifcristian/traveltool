@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LandmarkService} from '../../service/landmark.service';
 import {Landmark} from '../../model/landmark';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-landmark-list',
@@ -11,12 +12,17 @@ export class LandmarkListComponent implements OnInit {
 
   landmarks: Landmark[];
 
-  constructor(private landmarkService: LandmarkService) {
+  constructor(private landmarkService: LandmarkService, private router: Router) {
   }
 
   ngOnInit() {
     this.landmarkService.findAll().subscribe(data => {
       this.landmarks = data;
     });
+  }
+
+  deleteModel(model: Landmark) {
+    this.landmarkService.delete(model);
+    this.router.navigate(['/customers']);
   }
 }

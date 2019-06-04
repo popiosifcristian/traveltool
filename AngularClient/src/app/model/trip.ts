@@ -2,7 +2,7 @@ import {Landmark} from './landmark';
 import {Company} from './company';
 
 export class Trip {
-  id: bigint;
+  id: number;
   landmark: Landmark;
   transportCompany: Company;
   date: string;

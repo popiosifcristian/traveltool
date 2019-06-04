@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Trip} from '../../model/trip';
 import {TripService} from '../../service/trip.service';
+import {Customer} from '../../model/customer';
+import {CustomerService} from '../../service/customer.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-trip-list',
@@ -11,12 +14,17 @@ export class TripListComponent implements OnInit {
 
   trips: Trip[];
 
-  constructor(private tripService: TripService) {
+  constructor(private tripService: TripService, private router: Router) {
   }
 
   ngOnInit() {
     this.tripService.findAll().subscribe(data => {
       this.trips = data;
     });
+  }
+
+  deleteModel(model: Trip) {
+    this.tripService.delete(model);
+    this.router.navigate(['/customers']);
   }
 }

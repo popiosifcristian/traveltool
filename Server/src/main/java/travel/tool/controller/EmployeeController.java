@@ -33,7 +33,8 @@ public class EmployeeController {
 
     @PostMapping(value = "/save")
     public EmployeeEpo save(@RequestBody EmployeeEpo model) {
-        return employeeMapper.toExternal(employeeService.save(employeeMapper.toInternal(model)));
+        employeeService.save(employeeMapper.toInternal(model));
+        return model;
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.DELETE)

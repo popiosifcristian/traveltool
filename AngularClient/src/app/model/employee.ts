@@ -1,7 +1,7 @@
 import {Company} from './company';
 
 export class Employee {
-  id: bigint;
+  id: number;
   username: string;
   password: string;
   email: string;

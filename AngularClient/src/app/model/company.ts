@@ -1,7 +1,7 @@
 import {CompanyType} from './company-type.enum';
 
 export class Company {
-  id: bigint;
+  id: number;
   name: string;
   address: string;
   email: string;

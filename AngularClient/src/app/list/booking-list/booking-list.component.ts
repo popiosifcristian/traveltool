@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Booking} from '../../model/booking';
 import {BookingService} from '../../service/booking.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-booking-list',
@@ -11,7 +12,7 @@ export class BookingListComponent implements OnInit {
 
   bookings: Booking[];
 
-  constructor(private bookingService: BookingService) {
+  constructor(private bookingService: BookingService, private router: Router) {
   }
 
   ngOnInit() {
@@ -20,4 +21,8 @@ export class BookingListComponent implements OnInit {
     });
   }
 
+  deleteModel(booking: Booking) {
+    this.bookingService.delete(booking);
+    this.router.navigate(['/bookings']);
+  }
 }

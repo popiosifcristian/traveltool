@@ -54,20 +54,20 @@ public class ApplicationConfiguration {
 //    public CommandLineRunner schedulingRunner(TaskExecutor executor) {
 //        return strings -> executor.execute(getServer());
 //    }
-
-    @Bean
-    public FormattingConversionService conversionService() {
-        DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(false);
-
-        conversionService.addFormatterForFieldAnnotation(new NumberFormatAnnotationFormatterFactory());
-
-        DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
-        registrar.setDateFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        registrar.setTimeFormatter(DateTimeFormatter.ofPattern("HH:mm:ss"));
-        registrar.setDateTimeFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-        registrar.registerFormatters(conversionService);
-
-        return conversionService;
-    }
+//
+//    @Bean
+//    public FormattingConversionService conversionService() {
+//        DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(false);
+//
+//        conversionService.addFormatterForFieldAnnotation(new NumberFormatAnnotationFormatterFactory());
+//
+//        DateTimeFormatterRegistrar registrar = new DateTimeFormatterRegistrar();
+//        registrar.setDateFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+//        registrar.setTimeFormatter(DateTimeFormatter.ofPattern("HH:mm:ss"));
+//        registrar.setDateTimeFormatter(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+//        registrar.registerFormatters(conversionService);
+//
+//        return conversionService;
+//    }
 }
 

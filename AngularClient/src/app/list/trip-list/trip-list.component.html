@@ -10,6 +10,7 @@
         <th scope="col">Start time</th>
         <th scope="col">Price</th>
         <th scope="col">Available Places</th>
+        <th scope="col">Delete</th>
       </tr>
       </thead>
       <tbody>
@@ -21,6 +22,7 @@
         <td>{{ trip.startTime }}</td>
         <td>{{ trip.price }}</td>
         <td>{{ trip.availablePlaces }}</td>
+        <button id="remove" (click)="deleteModel(trip)">Delete</button>
       </tr>
       </tbody>
     </table>
