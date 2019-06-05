@@ -11,11 +11,21 @@ import travel.tool.repository.ITripRepository;
 /**
  * @author ipop
  */
-//@Repository("tripRepository")
-public interface TripRepository {}
-// extends JpaRepository<Trip, Long>, ITripRepository {
+@Repository("tripRepository")
+public interface TripRepository extends JpaRepository<Trip, Long>, ITripRepository {
 //    @Override
 //    @Modifying(clearAutomatically = true)
 //    @Query("UPDATE trip t SET t.available_places= :availablePlaces WHERE t.id= :id")
 //    int updateAvailablePlaces(@Param("id") long id, @Param("availablePlaces") int availablePlaces);
-//}
+//
+
+    @Override
+    default int getAvailablePlacesById(long id) {
+        return 0;
+    }
+
+    @Override
+    default int updateAvailablePlaces(long id, int availablePlaces) {
+        return 0;
+    }
+}

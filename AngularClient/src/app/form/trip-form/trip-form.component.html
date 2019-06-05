@@ -1,0 +1,15 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input type="number" [(ngModel)]="landmarkId" class="form-control" placeholder="Enter landmark id" name="landmark">
+        <input type="number" [(ngModel)]="transportCompanyId" class="form-control" placeholder="Enter transport company" name="transportCompany">
+        <input type="text" [(ngModel)]="model.date" class="form-control" placeholder="Enter date" name="date">
+        <input type="text" [(ngModel)]="model.startTime" class="form-control" placeholder="Enter start time" name="time">
+        <input type="text" [(ngModel)]="model.price" class="form-control" placeholder="Enter price" name="price">
+        <input type="text" [(ngModel)]="model.availablePlaces" class="form-control" placeholder="Enter availablePlaces" name="places">
+      </div>
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>

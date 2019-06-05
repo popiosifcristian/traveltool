@@ -17,9 +17,7 @@ import travel.tool.util.StageManager;
 /**
  * @author ipop
  */
-@SpringBootApplication
-@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class})
-@ComponentScan(basePackages = { "travel.tool" })
+@SpringBootApplication(scanBasePackages = {"travel.tool"}, exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, HibernateJpaAutoConfiguration.class, JpaRepositoriesAutoConfiguration.class})
 public class TravelToolClient extends Application {
 
     protected ConfigurableApplicationContext springContext;

@@ -1,0 +1,12 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <input type="text" [(ngModel)]="model.name" class="form-control" placeholder="Enter name" name="name">
+        <input type="text" [(ngModel)]="model.location" class="form-control" placeholder="Enter location" name="location">
+        <input type="text" [(ngModel)]="model.description" class="form-control" placeholder="Enter description" name="description">
+      </div>
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>

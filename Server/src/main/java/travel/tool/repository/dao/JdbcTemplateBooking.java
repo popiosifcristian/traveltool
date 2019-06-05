@@ -8,7 +8,6 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Repository;
 import travel.tool.model.Booking;
 import travel.tool.repository.IBookingRepository;
-import travel.tool.repository.ICustomerRepository;
 import travel.tool.repository.ITripRepository;
 
 import javax.sql.DataSource;

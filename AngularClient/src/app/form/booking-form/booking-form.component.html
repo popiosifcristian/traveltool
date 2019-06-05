@@ -1,0 +1,16 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label >Trip Id</label>
+        <input type="number" [(ngModel)]="tripId" class="form-control" name="trip-id">
+      </div>
+      <div class="form-group">
+        <input type="text" [(ngModel)]="booking.customer" class="form-control" placeholder="Enter customer" name="customer">
+        <input type="text" [(ngModel)]="booking.phoneNumber" class="form-control" placeholder="Enter customer phone number" name="phoneNumber">
+        <input type="text" [(ngModel)]="booking.tickets" class="form-control" placeholder="Enter tickets number" name="tickets">
+      </div>
+      <button type="submit" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+</div>
