@@ -26,9 +26,14 @@ export class BookingFormComponent implements OnInit {
 
   async onSubmit() {
     this.booking.id = 0;
-    this.trip = await this.tripService.getOne(this.tripId).toPromise();
-    this.booking.trip = this.trip;
-    this.bookingService.save(this.booking).subscribe(() => this.goToBookingList());
+    // this.trip = await this.tripService.getOne(this.tripId).toPromise();
+    // this.booking.trip = this.trip;
+    // this.bookingService.save(this.booking).subscribe(() => this.goToBookingList());
+  
+    this.tripService.getOne(this.tripId).subscribe((res) => {
+      this.booking.trip = res;
+      this.bookingService.save(this.booking).subscribe(() => this.goToBookingList());
+    });
   }
 
   goToBookingList() {

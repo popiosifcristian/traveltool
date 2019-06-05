@@ -22,7 +22,11 @@ export class BookingListComponent implements OnInit {
   }
 
   deleteModel(booking: Booking) {
-    this.bookingService.delete(booking);
-    this.router.navigate(['/bookings']);
+    this.bookingService.delete(booking).subscribe(() => {
+      console.log('it\'s done');
+      this.bookingService.findAll().subscribe(data => {
+        this.bookings = data;
+      });
+    });
   }
 }

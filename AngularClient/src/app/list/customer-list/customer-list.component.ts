@@ -25,7 +25,10 @@ export class CustomerListComponent implements OnInit {
 
   deleteModel(model: Customer) {
     console.log(model);
-    this.customerService.delete(model);
-    this.router.navigate(['/customers']);
+    this.customerService.delete(model).subscribe(() => {
+      this.customerService.findAll().subscribe(data => {
+        this.customers = data;
+      });
+    });
   }
 }

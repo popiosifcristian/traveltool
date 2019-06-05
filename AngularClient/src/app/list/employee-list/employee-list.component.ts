@@ -24,7 +24,10 @@ export class EmployeeListComponent implements OnInit {
   }
 
   deleteModel(model: Employee) {
-    this.employeeService.delete(model);
-    this.router.navigate(['/employees']);
+    this.employeeService.delete(model).subscribe(() => {
+      this.employeeService.findAll().subscribe(data => {
+        this.employees = data;
+      });
+    });
   }
 }

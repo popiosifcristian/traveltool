@@ -24,7 +24,10 @@ export class TripListComponent implements OnInit {
   }
 
   deleteModel(model: Trip) {
-    this.tripService.delete(model);
-    this.router.navigate(['/customers']);
+    this.tripService.delete(model).subscribe(() => {
+      this.tripService.findAll().subscribe(data => {
+        this.trips = data;
+      });
+    });
   }
 }

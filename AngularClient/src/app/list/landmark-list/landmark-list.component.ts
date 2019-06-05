@@ -22,7 +22,10 @@ export class LandmarkListComponent implements OnInit {
   }
 
   deleteModel(model: Landmark) {
-    this.landmarkService.delete(model);
-    this.router.navigate(['/customers']);
+    this.landmarkService.delete(model).subscribe(() => {
+      this.landmarkService.findAll().subscribe(data => {
+        this.landmarks = data;
+      });
+    });
   }
 }

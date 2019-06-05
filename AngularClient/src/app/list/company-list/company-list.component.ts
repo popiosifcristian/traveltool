@@ -22,7 +22,10 @@ export class CompanyListComponent implements OnInit {
   }
 
   deleteModel(model: Company) {
-    this.companyService.delete(model);
-    this.router.navigate(['/companies']);
+    this.companyService.delete(model).subscribe(() => {
+      this.companyService.findAll().subscribe(data => {
+        this.companies = data;
+      });
+    });
   }
 }

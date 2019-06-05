@@ -24,6 +24,7 @@ export class CustomerService {
   }
 
   public delete(customer: Customer) {
+    console.log(this.url + '/delete' + '?id=' + customer.id);
     return this.http.delete(this.url + '/delete' + '?id=' + customer.id);
   }
 }
